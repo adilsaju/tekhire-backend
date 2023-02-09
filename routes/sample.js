@@ -6,7 +6,8 @@ const express = require('express');
 const router = express.Router();
 
 const createAdmin = async (req, res, next) => {
-    console.log("hjw"); 
+    console.log("success"); 
+    res.json("success")
   };
 
 router.route('/login').get(createAdmin);
