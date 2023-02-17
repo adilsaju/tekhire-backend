@@ -38,6 +38,10 @@ const jobSchema = new mongoose.Schema({
       type: Schema.Types.ObjectId,
       ref: "employer"
 
+   },
+   technician:{
+      type: Schema.Types.ObjectId,
+      ref: "technician"
    }
    
 })
