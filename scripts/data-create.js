@@ -16,7 +16,7 @@ db.once('open',()=>console.error('connected to database'))
 
 
 
-console.log("rannnn data addd()")
+// console.log("rannnn data addd()")
 
 //data creation
 async function addData() {
