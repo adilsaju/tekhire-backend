@@ -10,6 +10,11 @@ const jobSchema = new mongoose.Schema({
     type: Date,
     required: true,
     default: Date.now
+   },
+   status:{
+      type: Number,
+      required:true,
+      default: 0
    }
 })
 // studentSchema.index({ 'email' : 1 }, { unique: true });
