@@ -26,6 +26,10 @@ const offerSchema = new mongoose.Schema({
    technicianID:{
     type: Schema.Types.ObjectId,
       ref: "technician"
+   },
+   prefer_start_date:{
+      type:Date,
+      required:true
    }
 
    

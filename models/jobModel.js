@@ -42,6 +42,10 @@ const jobSchema = new mongoose.Schema({
    technician:{
       type: Schema.Types.ObjectId,
       ref: "technician"
+   },
+   prefer_start_date:{
+      type:Date,
+      required:true
    }
    
 })
