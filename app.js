@@ -2,8 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express();
 const mongoose = require('mongoose')
-const {addData} = require("./scripts/data-create");
-// const studentRoute = require('./routes/studentRoute')
+// const {addData} = require("./scripts/data-create");
 const sample = require('./routes/mainRoute')
 
 
