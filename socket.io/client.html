@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
+    <script>
+      const socket = io("http://localhost:3000"); // connect to the default namespace
+
+      socket.on("connection", () => {
+        console.log("Connected to server");
+      });
+
+      socket.on("message", (data) => {
+        console.log("Received message from server:", data);
+      });
+
+      function sendMessage() {
+        const input = document.getElementById("message-input");
+        const message = input.value;
+        input.value = "";
+        socket.emit("message", message);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Socket.io Client</h1>
+    <input type="text" id="message-input" placeholder="Type your message">
+    <button onclick="sendMessage()">Send</button>
+  </body>
+</html>
