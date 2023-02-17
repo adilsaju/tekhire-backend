@@ -5,12 +5,11 @@ const Schema = mongoose.Schema
 
 const jobSchema = new mongoose.Schema({
    // firebase_uid: String,
-   name: {
+   title: {
       type: String,
-      required: true,
       
    },
-   date: {
+   posted_date: {
     type: Date,
    required: true,
     default: Date.now
@@ -23,12 +22,12 @@ const jobSchema = new mongoose.Schema({
      required:true,
       default: 0
    },
-   picture: {
-      type: String,
-      default: "https://storage.googleapis.com/yoke-e05d7.appspot.com/yoke%2F%2Faccount184822ff688.svg"
-   },
-   skillRequired: {
-      type: String
+   // picture: {
+   //    type: String,
+   //    default: "https://storage.googleapis.com/yoke-e05d7.appspot.com/yoke%2F%2Faccount184822ff688.svg"
+   // },
+   skills_required: {
+      type: [String]
    },
    location: {
       type: String,
@@ -39,12 +38,14 @@ const jobSchema = new mongoose.Schema({
       ref: "employer"
 
    },
-   technician:{
-      type: Schema.Types.ObjectId,
-      ref: "technician"
-   },
+   // technician:{
+   //    type: Schema.Types.ObjectId,
+   //    ref: "technician"
+   // },
    prefer_start_date:{
       type:Date,
+       default: Date.now
+
       // required:true
    }
    

@@ -10,12 +10,15 @@ const attendanceSchema = new mongoose.Schema({
    },
    clock_in:{
     type: Date,
+    default: Date.now
    },
    clock_out:{
-    type:Date
+    type:Date,
+    default: Date.now
    },
    shift_date:{
-    type:Date
+    type:Date,
+    default: Date.now
    }
    
    

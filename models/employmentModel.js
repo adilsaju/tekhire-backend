@@ -3,23 +3,24 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const employmentSchema = new mongoose.Schema({
-
    offer_id: {
-      type: String,
-      required: true,
-   },
+      type: Schema.Types.ObjectId,
+      ref: "offer"
+     },
    total_hours:{
     type: Number,
     required:true,
     default:0
    },
    start_date:{
-    type:Date
+    type:Date,
+    default: Date.now
    },
    end_date:{
-    type:Date
+    type:Date,
+    default: Date.now
    },
-   emplyment_status:{
+   employment_status:{
     type: Number,
     default:0
    }
