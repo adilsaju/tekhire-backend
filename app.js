@@ -4,7 +4,7 @@ const app = express();
 const mongoose = require('mongoose')
 const {addData} = require("./scripts/data-create");
 // const studentRoute = require('./routes/studentRoute')
-const sample = require('./routes/sample')
+const sample = require('./routes/mainRoute')
 
 
 const Student = require('./models/technicianModel')
