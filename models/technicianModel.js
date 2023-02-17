@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const studentSchema = new mongoose.Schema({
-   firebase_uid: String,
+const technicianSchema = new mongoose.Schema({
+   // firebase_uid: String,
    name: {
       type: String,
       required: true
@@ -43,10 +43,10 @@ const studentSchema = new mongoose.Schema({
       default: Date.now
    },
 })
-studentSchema.index({ 'email' : 1 }, { unique: true });
+technicianSchema.index({ 'email' : 1 }, { unique: true });
 
 
 module.exports = {
-   studentSchema: studentSchema,
-   studentModel: mongoose.model('student', studentSchema, 'student'),
+   technicianSchema,
+   technicianModel: mongoose.model('technician', technicianSchema, 'technician'),
 }

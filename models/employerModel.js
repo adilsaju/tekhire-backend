@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const adminSchema = new mongoose.Schema({
+const employerSchema = new mongoose.Schema({
    //  firebase_uid: String,
     name: {
        type: String,
@@ -36,11 +36,11 @@ const adminSchema = new mongoose.Schema({
    },
  })
 
-//  adminSchema.index({ 'email' : 1 }, { unique: true });
+//  employerSchema.index({ 'email' : 1 }, { unique: true });
 
 
  module.exports = {
-   adminSchema: adminSchema,
-   adminModel: mongoose.model('admin', adminSchema, 'admin'),
+   employerSchema,
+   employerModel: mongoose.model('employer', employerSchema, 'employer'),
  }
  

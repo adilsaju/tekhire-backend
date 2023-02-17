@@ -35,7 +35,7 @@ async function addData() {
     // const st1 = await Student.studentModel.findById("635cc5987f6ebdb5a0bc33f8");
     // const ad1 = await Student.studentModel.findById("635cc75e31911e7ed90568d1");
     
-    // const admin1 = await Admin.adminModel.create({name: "Claire" , email: "claire74sss7@gmail.com", password: "12345678" })
+    // const admin1 = await Admin.employerModel.create({name: "Claire" , email: "claire74sss7@gmail.com", password: "12345678" })
     
     // const student1 = await Student.studentModel.create({name: "Mohit" , email: "adilsajus7ss47@gmail.com", password: "12345678", studentNumber: 35209583920, photo: "assffsafsafsa", program: "cpl", studentRequirements: studentRequirements1 })
 

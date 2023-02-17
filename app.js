@@ -9,6 +9,8 @@ const sample = require('./routes/sample')
 
 const Student = require('./models/technicianModel')
 const Admin = require('./models/employerModel')
+const Job = require('./models/jobModel')
+
 
 const errorHandler = require('./middlewares/errorMiddleware')
 const jwt = require('jsonwebtoken')
