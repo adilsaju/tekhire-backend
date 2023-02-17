@@ -33,7 +33,10 @@ const technicianSchema = new mongoose.Schema({
       type: [String],
       required: true
    },
-
+   skill_certificates: {
+      type: [],
+      required: true
+   },
    picture: {
       type: String,
       default: "https://storage.googleapis.com/yoke-e05d7.appspot.com/yoke%2F%2Faccount184822ff688.svg"
