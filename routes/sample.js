@@ -9,6 +9,6 @@ const router = express.Router();
 
 
 router.route('/login').get(createAdmin);
-router.route('/getAllJobs').get(getAllJobs);
+// router.route('/getAllJobs').get(getAllJobs);
 
 module.exports = router;

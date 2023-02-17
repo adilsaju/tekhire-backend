@@ -1,18 +1,13 @@
-const Student = require('../models/technicianModel')
-const Admin = require('../models/employerModel')
+const Job = require('../models/jobModel')
+
 require('dotenv').config()
 const express = require('express')
 const app = express();
 const mongoose = require('mongoose')
-// const studentRoute = require('./routes/studentRoute')
-// const bodyParser = require('body-parser')
 
-// const login = require('./routes/login')
-// const errorHandler = require('./middlewares/errorMiddleware')
-// const jwt = require('jsonwebtoken')
+
 
 const port = process.env.PORT || 5001
-
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true } )
 const db = mongoose.connection 
 db.on('error',(error)=>console.error(error))
@@ -27,7 +22,7 @@ console.log("rannnn data addd()")
 async function addData() {
 
     
-    // const studentRequirements1 = await Checklist.studentRequirementsModel.create({flownHours: 123 , balance: 66, licenseType: "cpl", englishProficiency: true, medicalLicense: "abc", radioLicense: "abc", license: "xyz"})
+    const job1 = await Job.jobModel.create({name: "plumbing"})
 
     // const studentRequirements2 = await Checklist.studentRequirementsModel.create({flownHours: 123 , balance: 66, licenseType: "ppl", englishProficiency: true, medicalLicense: "abc", radioLicense: "abc", license: "xyz"})
 
@@ -50,6 +45,7 @@ async function addData() {
     
     //const user  = new User({ name: "Kyle" , age: 26 })
     //await user.save()
+    await job1.save()
     console.log("data added");
 }
 
