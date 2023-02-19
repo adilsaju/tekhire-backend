@@ -2,7 +2,10 @@
 const express = require('express');
 const job = require('../models/jobModel')
 const employer = require('../models/employerModel')
-const technician = require('../models/technicianModel')
+const technician = require('../models/technicianModel');
+const offer = require('../models/offerModel')
+
+
 
 
 const app = express();
@@ -11,12 +14,14 @@ const router = express.Router();
 
 const login = async (req, res, next) => {
     console.log("login");
+    
     // res.json("login")
     console.log("success");
     res.json("success")
+    
 };
 
-const getAllJobs = async (req, res, next) => {
+    const getAllJobs = async (req, res, next) => {
 
       console.log('getAllJobs()');
       try {
@@ -74,7 +79,7 @@ const getAllJobs = async (req, res, next) => {
 
   const getAllTechnicians = async (req, res, next) => {
 
-      console.log('getAllJobs()');
+      console.log('getAllTechnicians()');
       try {
         // const abc = await Job.jobModel.find();
         const abc = await technician.technicianModel.find();
@@ -85,12 +90,9 @@ const getAllJobs = async (req, res, next) => {
       }
     };
   
-
-
-
   const getAllEmployers = async (req, res, next) => {
 
-      console.log('getAllJobs()');
+      console.log('getAllEmployers()');
       try {
         // const abc = await Job.jobModel.find();
         const abc = await employer.employerModel.find();
@@ -99,13 +101,71 @@ const getAllJobs = async (req, res, next) => {
         res.status(500).json({ message: error.message });
       }
     };
+
+    const getAllOffers = async (req, res, next) => {
+      
+      console.log('getAllOffers()');
+      try {
+        // const abc = await Job.jobModel.find();
+        const abc = await offer.offerModel.find();
+        res.json(abc);
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+    };
+
+    const getOfferById = async (req, res, next) => {
+
+      console.log('getOfferbyId()');
+      try {
+        // const abc = await Job.jobModel.find();
+        const abc = await offer.offerModel.findById(req.params.id);
+        res.json(abc);
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+    };
   
+    const getOfferByJobId = async (req, res, next) => {
+
+      console.log('getOfferByJobId()');
+      try {
+        const jobId = req.query.job;
+  
+        if (
+          jobId === null ||
+          jobId === undefined ||
+          jobId === ''
+        ) {
+          res
+            .status(500)
+            .json({ message: 'no job ID found' });
+  
+          return;
+        }
+  
+        const abc = await offer.offerModel.find({
+          'jobID': jobId,
+        }).sort({ offer_date: 1 });
+  
+        res.json(abc);
+      } catch (error) {
+        res
+          .status(500)
+          .json({ error: true, message: error.message });
+      }
+    };
 
 
 
 module.exports = {
     login,
     getAllJobs,
-    getAllTechnicians,getAllEmployers,postJob
+    getAllTechnicians,
+    getAllEmployers,
+    getAllOffers,
+    getOfferById,
+    getOfferByJobId,
+    postJob
 
 }

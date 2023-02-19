@@ -34,6 +34,11 @@ const offerSchema = new mongoose.Schema({
    prefer_start_date:{
       type:Date,
       required:true
+   },
+   offer_date:{
+      type:Date,
+      required:true,
+      default:Date.now
    }
 
    

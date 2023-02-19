@@ -1,4 +1,5 @@
 const Job = require('../models/jobModel')
+const technician = require('../models/technicianModel')
 
 require('dotenv').config()
 const express = require('express')
@@ -22,7 +23,13 @@ db.once('open',()=>console.error('connected to database'))
 async function addData() {
 
     
-    const job1 = await Job.jobModel.create({name: "plumbing"})
+    // const job1 = await Job.jobModel.create({name: "plumbing"})
+
+    const job1 = await technician.technicianModel.create({name: "Rolan"})
+
+    await job1.save()
+    
+    console.log("data2 added");
 
     // const studentRequirements2 = await Checklist.studentRequirementsModel.create({flownHours: 123 , balance: 66, licenseType: "ppl", englishProficiency: true, medicalLicense: "abc", radioLicense: "abc", license: "xyz"})
 
@@ -45,11 +52,14 @@ async function addData() {
     
     //const user  = new User({ name: "Kyle" , age: 26 })
     //await user.save()
-    await job1.save()
+    // await job1.save()
     console.log("data added");
 }
 
 
+
+
 addData()
+
 
 exports.addData = addData
