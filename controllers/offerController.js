@@ -89,7 +89,7 @@ const createOffer = async (req, res, next) => {
       req.body.technicianId
     );
     const particularJob =
-    await technician.technicianModel.findById(
+    await job.jobModel.findById(
       req.body.jobID
     );
   try {
