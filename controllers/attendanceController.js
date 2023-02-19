@@ -82,14 +82,19 @@ const clockIn = async (req, res, next) => {
   
       
       //update in db
-      const offer1 = await attendance.attendanceModel.updateOne(
+      const attendance1 = await attendance.attendanceModel.updateOne(
        //time is set in hours
        {employment: particularempnt._id,clock_out:null },
         { $set: { clock_out: new Date(),shift_duration:(((new Date())-hoursoc.clock_in)/3600000) } }
       )
+
+      const emp1 =  await employment.employmentModel.updateOne(
+       { _id: req.body.employment_id},
+       { $set: {total_hours:(particularempnt.total_hours+(((new Date())-hoursoc.clock_in)/3600000))}}
+      );
   
       
-      res.json(particularempnt);
+      res.json(`clocked out at ${new Date()} you worked well today ! `);
       return
     } catch (error) {
       res.json({
