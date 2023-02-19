@@ -20,10 +20,17 @@ const employerNotificationSchema = new mongoose.Schema({
       type: String,
    },
 
-   pubs: {
-      type: [Schema.Types.ObjectId],
-      ref: "employer"
-   }
+   user_id: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      // ref: "employer",
+      refPath: 'docModel'
+   },
+   docModel: {
+      type: String,
+      required: true,
+      enum: ['employer', 'technician']
+    }
 })
 employerNotificationSchema.index({ 'email' : 1 }, { unique: true });
 

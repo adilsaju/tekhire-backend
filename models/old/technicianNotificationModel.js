@@ -16,12 +16,9 @@ const technicianNotificationSchema = new mongoose.Schema({
       type: Date,
       default: Date.now
    },
-   subs: {
-      type: String,
-   },
 
-   pubs: {
-      type: [Schema.Types.ObjectId],
+   technician_id: {
+      type: Schema.Types.ObjectId,
       ref: "technician"
    }
 })

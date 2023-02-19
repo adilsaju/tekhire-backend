@@ -3,7 +3,9 @@ const express = require('express')
 const app = express();
 const mongoose = require('mongoose')
 const {addData} = require("./scripts/data-create");
-const sample = require('./routes/mainRoute')
+const mainRoute = require('./routes/mainRoute')
+const notificationRoute = require('./routes/notificationRoute')
+
 
 
 const Student = require('./models/technicianModel')
@@ -42,7 +44,9 @@ app.use(express.json())
 // app.disable('view cache');
 
 //router 
-app.use("/api/v1/", sample)
+app.use("/api/v1/", mainRoute)
+app.use("/api/v1/", notificationRoute)
+
 
 // app.use("/login", login)
 

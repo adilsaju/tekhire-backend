@@ -35,7 +35,7 @@ const employerSchema = new mongoose.Schema({
    },
  })
 
-//  employerSchema.index({ 'email' : 1 }, { unique: true });
+ employerSchema.index({ 'email' : 1 }, { unique: true });
 
 
  module.exports = {
