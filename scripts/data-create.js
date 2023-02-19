@@ -1,5 +1,6 @@
 const Job = require('../models/jobModel')
 const technician = require('../models/technicianModel')
+const offer = require('../models/offerModel')
 
 require('dotenv').config()
 const express = require('express')
@@ -25,7 +26,9 @@ async function addData() {
     
     // const job1 = await Job.jobModel.create({name: "plumbing"})
 
-    const job1 = await technician.technicianModel.create({name: "Rolan"})
+    // const job1 = await tehncician.technicianModel.create({name: "Rolan", email:"a4@gmail.com", password: "12345678" })
+
+    const job1 = await offer.offerModel.create({offerPrice: 300,jobID:'63ef008d43d9a5abeef994af', offerHours: 15, prefer_start_date:'2023-02-25T01:51:17.997+00:00'})
 
     await job1.save()
     

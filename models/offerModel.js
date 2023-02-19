@@ -6,9 +6,8 @@ const Schema = mongoose.Schema
 const offerSchema = new mongoose.Schema({
 
    jobID: {
-      type: Number,
-      required: true,
-      
+      type: Schema.Types.ObjectId,
+        ref: "job"
    },
    offerPrice:{
     type: Number,
@@ -27,13 +26,10 @@ const offerSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
       ref: "technician"
    },
-   associated_job:{
-      type: Schema.Types.ObjectId,
-        ref: "technician"
-     },
    prefer_start_date:{
       type:Date,
-      required:true
+      required:true,
+      default:Date.now
    },
    offer_date:{
       type:Date,

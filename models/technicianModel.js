@@ -19,23 +19,23 @@ const technicianSchema = new mongoose.Schema({
    },
    income: {
       type: String,
-      required: true
+      // required: true
    },
    phone: {
       type: String,
-      required: true
+      // required: true
    },
-   id: {
+   license_id_something: {
       type: Number,
-      required: true
+      // required: true
    },
    skills: {
       type: [String],
-      required: true
+      // required: true
    },
    skill_certificates: {
       type: [],
-      required: true
+      // required: true
    },
    picture: {
       type: String,

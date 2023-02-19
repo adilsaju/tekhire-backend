@@ -18,7 +18,7 @@ router.route('/technicians').get(getAllTechnicians);
 router.route('/employers').get(getAllEmployers);
 
 router.route('/offers').get(getAllOffers);
-router.route('offer/:id').get(getOfferById);
-router.route('offer/job/:id').get(getOfferByJobId);
+router.route('/offer/:id').get(getOfferById);
+router.route('/offer/job/:id').get(getOfferByJobId);
 
 module.exports = router;

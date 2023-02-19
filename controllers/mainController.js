@@ -129,9 +129,10 @@ const login = async (req, res, next) => {
     const getOfferByJobId = async (req, res, next) => {
 
       console.log('getOfferByJobId()');
+
       try {
-        const jobId = req.query.job;
-  
+        const jobId = req.params.id;
+        console.log("jobId",jobId)
         if (
           jobId === null ||
           jobId === undefined ||
