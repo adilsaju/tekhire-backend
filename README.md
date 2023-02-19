@@ -1,4 +1,4 @@
 # tekk-backend 👷‍♀️👷
 
 ### RUN (dev)
-`npm run start`
+`npm start`

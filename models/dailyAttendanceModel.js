@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const attendanceSchema = new mongoose.Schema({
+const dailyAttendanceSchema = new mongoose.Schema({
 
    employment: {
     type: Schema.Types.ObjectId,
@@ -33,6 +33,6 @@ const attendanceSchema = new mongoose.Schema({
 })
 
 module.exports = {
-    attendanceSchema,
-   attendanceModel: mongoose.model('attendance', attendanceSchema, 'attendance'),
+    dailyAttendanceSchema,
+   dailyAttendanceModel: mongoose.model('attendance', dailyAttendanceSchema, 'attendance'),
 }

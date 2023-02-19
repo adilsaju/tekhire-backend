@@ -21,7 +21,7 @@ router.route('/login').get(login);
 router.route('/jobs').get(getAllJobs).post(postJob);
 router.route('/jobs/:id').get(getAllJobs);
 
-router.route('/employment').get(getEmployment)
+router.route('/employments').get(getEmployment)
 
 router.route('/technicians').get(getAllTechnicians).post(createTechnician).patch(updateTechnicianPhoto,uploadTechPhoto);
 router.route('/technicians/:id').get().patch(uploadTechPhoto,updateTechnicianPhoto);

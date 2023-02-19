@@ -5,7 +5,7 @@ const technician = require('../models/technicianModel');
 const offer = require('../models/offerModel')
 const socketServer = require('../socket2/socket-server');
 const employment = require('../models/employmentModel')
-const attendance = require('../models/attendanceModel')
+const attendance = require('../models/dailydailyAttendanceModel')
 
 const app = express();
 const router = express.Router();
@@ -17,7 +17,7 @@ const getAttendance = async (req, res, next) => {
     console.log('getAttendance()');
     try {
       
-        respone = await attendance.attendanceModel.find(); 
+        respone = await attendance.dailyAttendanceModel.find(); 
         res.json(respone);
 
     } catch (error) {
@@ -46,7 +46,7 @@ const clockIn = async (req, res, next) => {
        clock_out:null
       };
       //update in db
-      const offer1 = await attendance.attendanceModel.create(
+      const offer1 = await attendance.dailyAttendanceModel.create(
         attendanceObj
       );
         
@@ -79,7 +79,7 @@ const clockIn = async (req, res, next) => {
         particularempnt.offer_id
       );
     
-      const hoursoc = await attendance.attendanceModel.findOne(
+      const hoursoc = await attendance.dailyAttendanceModel.findOne(
         {employment: particularempnt._id,clock_out:null }
       )
     
@@ -87,7 +87,7 @@ const clockIn = async (req, res, next) => {
   
       
       //update in db
-      const attendance1 = await attendance.attendanceModel.updateOne(
+      const attendance1 = await attendance.dailyAttendanceModel.updateOne(
        //time is set in hours
        {employment: particularempnt._id,clock_out:null },
         { $set: { clock_out: new Date(),shift_duration:(((new Date())-hoursoc.clock_in)/3600000), shift_pay: (pay_perhr.offerPrice)*(((new Date())-hoursoc.clock_in)/3600000)} }
