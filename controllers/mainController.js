@@ -185,6 +185,46 @@ const createEmployer = async (req, res, next) => {
 };
 
 
+// const file = req.file
+// if (!file) {
+//   const error = new Error('Please upload a file')
+//   error.httpStatusCode = 400
+//   return next(error)
+// }
+//   res.send(file)
+
+
+const saveToDb = async (id) => {
+        //DB SHENNNNN
+
+
+      // const abc = await technician.technicianModel.findById(id);
+      // abc.photo = req.file.publicUrl;
+      // abc.save()
+}
+
+const updateTechnicianPhoto = async (req,res,next) => {
+  const file = req.file
+if (!file) {
+  const error = new Error('Please upload a file')
+  error.httpStatusCode = 400
+  return next(error)
+}
+//
+const abc = await technician.technicianModel.findById(req.params.id);
+console.log("abcccc");
+console.log(abc);
+console.log(file);
+
+
+abc.picture = req.file.publicUrl;
+await abc.save()
+console.log(abc);
+
+
+  res.send(file)
+}
+
 module.exports = {
   login,
   getAllJobs,
@@ -192,6 +232,7 @@ module.exports = {
   getAllEmployers,
   postJob,
   createTechnician,
-  createEmployer
+  createEmployer,
+  updateTechnicianPhoto
 
 }
