@@ -15,6 +15,12 @@ const errorHandler = require('./middlewares/errorMiddleware')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
 
+//SOCKET FOR CHAT
+const http = require('http');
+const socketServer = require('./socket2/socket-server');
+const server = http.createServer(app);
+socketServer.init(server);
+//
 
 const port = process.env.PORT || 5001
 
@@ -29,7 +35,7 @@ db.once('open',()=>console.error('connected to database'))
 //     // Handle errors
 // });
 // addData()
-// app.use(cors())
+app.use(cors())
 
 //middleware
 app.use(express.json())
@@ -52,7 +58,7 @@ app.use((req, res, next) => {
   });
 });
 
-app.listen(port, ()=>{
+server.listen(port, ()=>{
     console.log('server started');
 })
 

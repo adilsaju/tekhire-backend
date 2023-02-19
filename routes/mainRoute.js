@@ -18,7 +18,11 @@ router.route('/technicians').get(getAllTechnicians);
 router.route('/employers').get(getAllEmployers);
 
 router.route('/offers').get(getAllOffers);
-router.route('/offer/:id').get(getOfferById);
-router.route('/job/:id/offer').get(getOfferByJobId);
+router.route('/offers/:id').get(getOfferById);
+router.route('/jobs/:id/offers').get(getOfferByJobId);
+//CHAT
+// router.route('/message').post(chat);
+
+
 
 module.exports = router;
