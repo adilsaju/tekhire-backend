@@ -1,5 +1,6 @@
 const express = require('express');
-const { getAllJobs, login,getAllTechnicians,getAllEmployers,postJob, getAllOffers, getOfferById, getOfferByJobId} = require('../controllers/mainController')
+const { getAllJobs, login,getAllTechnicians,getAllEmployers,postJob} = require('../controllers/mainController')
+const {  getAllOffers, getOfferById, getOfferByJobId} = require('../controllers/offerController')
 
 // const multer = require('multer');
 // const path = require('path');
