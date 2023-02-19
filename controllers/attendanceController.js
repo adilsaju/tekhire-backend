@@ -5,7 +5,7 @@ const technician = require('../models/technicianModel');
 const offer = require('../models/offerModel')
 const socketServer = require('../socket2/socket-server');
 const employment = require('../models/employmentModel')
-const attendance = require('../models/dailydailyAttendanceModel')
+const attendance = require('../models/dailyAttendanceModel')
 
 const app = express();
 const router = express.Router();
