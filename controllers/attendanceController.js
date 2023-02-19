@@ -10,8 +10,6 @@ const attendance = require('../models/attendanceModel')
 const app = express();
 const router = express.Router();
 
-const date = new Date();
-const date_diff = 0;
 
 
 const getAttendance = async (req, res, next) => {
@@ -76,14 +74,18 @@ const clockIn = async (req, res, next) => {
         req.body.employment_id
       );
     
+      const hoursoc = await attendance.attendanceModel.findOne(
+        {employment: particularempnt._id,clock_out:null }
+      )
+    
     try {
   
       
       //update in db
       const offer1 = await attendance.attendanceModel.updateOne(
-       
+       //time is set in hours
        {employment: particularempnt._id,clock_out:null },
-        { $set: { clock_out: date,shift_duration:date_diff } }
+        { $set: { clock_out: new Date(),shift_duration:(((new Date())-hoursoc.clock_in)/3600000) } }
       )
   
       
