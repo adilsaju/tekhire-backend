@@ -14,11 +14,11 @@ const employmentSchema = new mongoose.Schema({
    },
    start_date:{
     type:Date,
-    default: Date.now
+    
    },
    end_date:{
     type:Date,
-    default: Date.now
+    default: null
    },
    employment_status:{
     type: Number,

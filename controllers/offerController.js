@@ -159,8 +159,8 @@ const acceptoffer = async (req, res, next) => {
 
     const employmentObj = {
         offer_id:particularOffer,
-        start_date:req.body.start_date,
-        end_date:req.body.end_date
+        start_date:particularOffer.prefer_start_date,
+       
     };
     //update in db
     const offer1 = await employment.employmentModel.create(
