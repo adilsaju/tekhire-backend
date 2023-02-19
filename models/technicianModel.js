@@ -20,6 +20,7 @@ const technicianSchema = new mongoose.Schema({
    income: {
       type: String,
       // required: true
+      default: 0
    },
    phone: {
       type: String,
@@ -44,6 +45,10 @@ const technicianSchema = new mongoose.Schema({
    dateJoined: {
       type: Date,
       default: Date.now
+   },
+   total_hours_worked: {
+      type: Number,
+      default: 0
    },
 })
 technicianSchema.index({ 'email' : 1 }, { unique: true });

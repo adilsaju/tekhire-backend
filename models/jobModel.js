@@ -38,10 +38,10 @@ const jobSchema = new mongoose.Schema({
       ref: "employer"
 
    },
-   // technician:{
-   //    type: Schema.Types.ObjectId,
-   //    ref: "technician"
-   // },
+   technician:{
+      type: Schema.Types.ObjectId,
+      ref: "technician"
+   },
    prefer_start_date:{
       type:Date,
        default: Date.now
