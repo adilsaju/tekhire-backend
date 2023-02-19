@@ -11,6 +11,23 @@ const app = express();
 const router = express.Router();
 
 const date = new Date();
+const date_diff = 0;
+
+
+const getAttendance = async (req, res, next) => {
+
+    console.log('getAttendance()');
+    try {
+      
+        respone = await attendance.attendanceModel.find(); 
+        res.json(respone);
+
+    } catch (error) {
+      res.status(500).json({
+        message: error.message
+      });
+    }
+  };
 
 const clockIn = async (req, res, next) => {
 
@@ -34,7 +51,8 @@ const clockIn = async (req, res, next) => {
       const offer1 = await attendance.attendanceModel.create(
         attendanceObj
       );
-  
+        
+      
   
       res.json(offer1);
       return
@@ -65,10 +83,10 @@ const clockIn = async (req, res, next) => {
       const offer1 = await attendance.attendanceModel.updateOne(
        
        {employment: particularempnt._id,clock_out:null },
-        { $set: { clock_out: date } }
+        { $set: { clock_out: date,shift_duration:date_diff } }
       )
   
-  
+      
       res.json(particularempnt);
       return
     } catch (error) {
@@ -83,5 +101,6 @@ const clockIn = async (req, res, next) => {
   
 module.exports = {
     clockIn,
-    clockOut
+    clockOut,
+    getAttendance
 }

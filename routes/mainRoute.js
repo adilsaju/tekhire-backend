@@ -1,5 +1,5 @@
 const express = require('express');
-const { clockIn, clockOut } = require('../controllers/attendanceController');
+const { clockIn, clockOut, getAttendance } = require('../controllers/attendanceController');
 const { getAllJobs, login,getAllTechnicians,getAllEmployers,postJob,
     createTechnician,
     createEmployer,
@@ -37,6 +37,7 @@ router.route('/offers/:id/accept').post(acceptoffer)
 
 router.route('/jobs/:id/clockin').post(clockIn)
 router.route('/jobs/:id/clockout').post(clockOut)
+router.route('/attendance').get(getAttendance)
 
 
 module.exports = router;
