@@ -109,11 +109,89 @@ const getAllEmployers = async (req, res, next) => {
   }
 };
 
+
+const createTechnician = async (req, res, next) => {
+
+  console.log('createTechnician()');
+
+  console.log(req.body);
+  // {
+  //   employerId: dmksadmlkd
+  // }
+
+
+  try {
+    //create obj
+    const technicianObj = {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      phone: req.body.location,
+      // picture: tricky
+    };
+
+    //update in db
+    const technician1 = await technician.technicianModel.create(
+      technicianObj
+    );
+    // console.log('request1:', request1);
+
+    res.json(technician1);
+    return
+  } catch (error) {
+    res.json({
+      error: true,
+      message: error.message
+    });
+    return
+  }
+};
+
+const createEmployer = async (req, res, next) => {
+
+  console.log('createTechnician()');
+
+  console.log(req.body);
+  // {
+  //   employerId: dmksadmlkd
+  // }
+
+
+  try {
+    //create obj
+    const employerObj = {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      phone: req.body.location,
+      // picture: tricky
+    };
+
+    //update in db
+    const employer1 = await employer.employerModel.create(
+      employerObj
+    );
+    // console.log('request1:', request1);
+
+    res.json(employer1);
+    return
+  } catch (error) {
+    res.json({
+      error: true,
+      message: error.message
+    });
+    return
+  }
+};
+
+
 module.exports = {
   login,
   getAllJobs,
   getAllTechnicians,
   getAllEmployers,
-  postJob
+  postJob,
+  createTechnician,
+  createEmployer
 
 }

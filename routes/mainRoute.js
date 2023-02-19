@@ -1,5 +1,9 @@
 const express = require('express');
-const { getAllJobs, login,getAllTechnicians,getAllEmployers,postJob} = require('../controllers/mainController')
+const { getAllJobs, login,getAllTechnicians,getAllEmployers,postJob,
+    createTechnician,
+    createEmployer
+
+} = require('../controllers/mainController')
 const {  getAllOffers, getOfferById, getOfferByJobId} = require('../controllers/offerController')
 
 // const multer = require('multer');
@@ -14,9 +18,9 @@ router.route('/jobs').get(getAllJobs).post(postJob);
 router.route('/jobs/:id').get(getAllJobs);
 
 
-router.route('/technicians').get(getAllTechnicians);
+router.route('/technicians').get(getAllTechnicians).post(createTechnician);
 
-router.route('/employers').get(getAllEmployers);
+router.route('/employers').get(getAllEmployers).post(createEmployer);
 
 router.route('/offers').get(getAllOffers);
 router.route('/offers/:id').get(getOfferById);

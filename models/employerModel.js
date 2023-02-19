@@ -27,7 +27,7 @@ const employerSchema = new mongoose.Schema({
    },
     id: {
       type: String,
-      required: true
+      // required: true
    },
    dateJoined: {
       type: Date,
