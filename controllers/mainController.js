@@ -217,7 +217,9 @@ console.log(abc);
 console.log(file);
 
 
-abc.picture = req.file.publicUrl;
+// abc.picture = req.file.publicUrl;
+abc.picture = req.file.location;
+
 await abc.save()
 console.log(abc);
 
