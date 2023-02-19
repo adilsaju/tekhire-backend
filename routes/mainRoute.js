@@ -4,7 +4,7 @@ const { getAllJobs, login,getAllTechnicians,getAllEmployers,postJob,
     createEmployer
 
 } = require('../controllers/mainController')
-const {  getAllOffers, getOfferById, getOfferByJobId, createOffer} = require('../controllers/offerController')
+const {  getAllOffers, getOfferById, getOfferByJobId, createOffer, acceptoffer} = require('../controllers/offerController')
 
 // const multer = require('multer');
 // const path = require('path');
@@ -25,6 +25,7 @@ router.route('/employers').get(getAllEmployers).post(createEmployer);
 router.route('/offers').get(getAllOffers).post(createOffer);
 router.route('/offers/:id').get(getOfferById);
 router.route('/jobs/:id/offers').get(getOfferByJobId);
+router.route('/offers/:id/accept').post(acceptoffer)
 //CHAT
 // router.route('/message').post(chat);
 

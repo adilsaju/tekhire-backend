@@ -5,6 +5,7 @@ const employer = require('../models/employerModel')
 const technician = require('../models/technicianModel');
 const offer = require('../models/offerModel')
 const socketServer = require('../socket2/socket-server');
+const employment = require('../models/employmentModel')
 
 const app = express();
 const router = express.Router();
@@ -99,7 +100,7 @@ const createOffer = async (req, res, next) => {
      jobID: particularJob,
       offerPrice:req.body.offerPrice,
       offerHours:req.body.offerHours,
-     // technician_who_offered:particularTechnician,
+     technician_who_offered:particularTechnician,
       prefer_start_date:req.body.prefer_start_date
 
     };
@@ -119,11 +120,77 @@ const createOffer = async (req, res, next) => {
     return
   }
 };
+
+
+const acceptoffer = async (req, res, next) => {
+
+  console.log('acceptoffer()');
+
+  console.log(req.body);
+
+
+  const particularOffer =
+    await offer.offerModel.findById(
+      req.body.offer_id
+    );
+  const particularJob = 
+      await job.jobModel.findById(
+        particularOffer.jobID
+      )
+    
+// return
+    
+ if (!particularOffer.isAccepted){
+  try {
+
+    const employmentObj = {
+        offer_id:particularOffer,
+        start_date:req.body.start_date,
+        end_date:req.body.end_date
+    };
+    //update in db
+    const offer1 = await employment.employmentModel.create(
+      employmentObj
+    );
+
+    const upd = await offer.offerModel.updateOne(
+      { _id: req.body.offer_id },
+      { $set: { isAccepted: true } }
+   )
+   const upd2 = await job.jobModel.updateOne(
+    { _id: particularJob._id },
+    { $set: { status: 1 } }
+ )
+   console.log("pppppp",particularJob._id)
+   console.log(particularOffer)
+
+    res.json(offer1);
+
+    
+    return
+  } catch (error) {
+    res.json({
+      error: true,
+      message: error.message
+    });
+    return
+  }
+  
+
+ }else{
+  console.log(particularOffer.isAccepted)
+  res.json("already accepted");
+  return
+  
+}
+};
+
   
 
 module.exports = {
     getAllOffers,
     getOfferById,
     getOfferByJobId,
-    createOffer
+    createOffer,
+    acceptoffer
 }
