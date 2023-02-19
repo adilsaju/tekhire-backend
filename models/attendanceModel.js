@@ -24,6 +24,9 @@ const attendanceSchema = new mongoose.Schema({
    shift_duration:{
       type:Number,
       default:0
+   },
+   shift_pay:{
+      type:Number
    }
    
    

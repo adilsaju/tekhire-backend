@@ -74,6 +74,11 @@ const clockIn = async (req, res, next) => {
         req.body.employment_id
       );
     
+
+    const pay_perhr = await offer.offerModel.findById(
+        particularempnt.offer_id
+      );
+    
       const hoursoc = await attendance.attendanceModel.findOne(
         {employment: particularempnt._id,clock_out:null }
       )
@@ -85,12 +90,12 @@ const clockIn = async (req, res, next) => {
       const attendance1 = await attendance.attendanceModel.updateOne(
        //time is set in hours
        {employment: particularempnt._id,clock_out:null },
-        { $set: { clock_out: new Date(),shift_duration:(((new Date())-hoursoc.clock_in)/3600000) } }
+        { $set: { clock_out: new Date(),shift_duration:(((new Date())-hoursoc.clock_in)/3600000), shift_pay: (pay_perhr.offerPrice)*(((new Date())-hoursoc.clock_in)/3600000)} }
       )
 
       const emp1 =  await employment.employmentModel.updateOne(
        { _id: req.body.employment_id},
-       { $set: {total_hours:(particularempnt.total_hours+(((new Date())-hoursoc.clock_in)/3600000))}}
+       { $set: {total_hours:(particularempnt.total_hours+(((new Date())-hoursoc.clock_in)/3600000)),total_income:particularempnt.total_income+(pay_perhr.offerPrice)*(((new Date())-hoursoc.clock_in)/3600000)}}
       );
   
       

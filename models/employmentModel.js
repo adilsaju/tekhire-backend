@@ -12,9 +12,13 @@ const employmentSchema = new mongoose.Schema({
     required:true,
     default:0
    },
+   total_income:{
+      type:Number,
+      required:true,
+      default:0
+   },
    start_date:{
     type:Date,
-    
    },
    end_date:{
     type:Date,
