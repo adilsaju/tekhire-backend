@@ -30,7 +30,7 @@ async function addData() {
 
     const job1 = await offer.offerModel.create({offerPrice: 300,jobID:'63ef008d43d9a5abeef994af', offerHours: 15, prefer_start_date:'2023-02-25T01:51:17.997+00:00'})
 
-    await job1.save()
+    // await job1.save()
     
     console.log("data2 added");
 

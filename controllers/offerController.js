@@ -76,10 +76,54 @@ const getAllOffers = async (req, res, next) => {
     }
   };
 
+  
+const createOffer = async (req, res, next) => {
 
+  console.log('createOffer()');
+
+  console.log(req.body);
+
+
+  const particularTechnician =
+    await technician.technicianModel.findById(
+      req.body.technicianId
+    );
+    const particularJob =
+    await technician.technicianModel.findById(
+      req.body.jobID
+    );
+  try {
+
+    const offerObj = {
+ 
+     jobID: particularJob,
+      offerPrice:req.body.offerPrice,
+      offerHours:req.body.offerHours,
+     // technician_who_offered:particularTechnician,
+      prefer_start_date:req.body.prefer_start_date
+
+    };
+    //update in db
+    const offer1 = await offer.offerModel.create(
+      offerObj
+    );
+
+
+    res.json(offer1);
+    return
+  } catch (error) {
+    res.json({
+      error: true,
+      message: error.message
+    });
+    return
+  }
+};
+  
 
 module.exports = {
     getAllOffers,
     getOfferById,
     getOfferByJobId,
+    createOffer
 }
