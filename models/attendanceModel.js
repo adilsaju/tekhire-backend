@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const attendanceSchema = new mongoose.Schema({
 
-   employment_id: {
+   employment: {
     type: Schema.Types.ObjectId,
     ref: "employment"
    },
@@ -14,11 +14,16 @@ const attendanceSchema = new mongoose.Schema({
    },
    clock_out:{
     type:Date,
-    default: Date.now
+    default:null
+   //  default: Date.now
    },
    shift_date:{
     type:Date,
     default: Date.now
+   },
+   shift_duration:{
+      type:Number,
+      default:0
    }
    
    
@@ -26,5 +31,5 @@ const attendanceSchema = new mongoose.Schema({
 
 module.exports = {
     attendanceSchema,
-   employmentModel: mongoose.model('attendance', attendanceSchema, 'attendance'),
+   attendanceModel: mongoose.model('attendance', attendanceSchema, 'attendance'),
 }

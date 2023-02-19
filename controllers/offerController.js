@@ -24,6 +24,20 @@ const getAllOffers = async (req, res, next) => {
       });
     }
   };
+
+  const getEmployment = async (req, res, next) => {
+
+    console.log('getEmployment()');
+    try {
+      // const abc = await Job.jobModel.find();
+      const abc = await employment.employmentModel.find();
+      res.json(abc);
+    } catch (error) {
+      res.status(500).json({
+        message: error.message
+      });
+    }
+  };
   
   const getOfferById = async (req, res, next) => {
   
@@ -191,6 +205,7 @@ module.exports = {
     getAllOffers,
     getOfferById,
     getOfferByJobId,
+    getEmployment,
     createOffer,
     acceptoffer
 }

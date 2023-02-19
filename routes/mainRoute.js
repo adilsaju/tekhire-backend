@@ -1,4 +1,5 @@
 const express = require('express');
+const { clockIn, clockOut } = require('../controllers/attendanceController');
 const { getAllJobs, login,getAllTechnicians,getAllEmployers,postJob,
     createTechnician,
     createEmployer,
@@ -6,7 +7,7 @@ const { getAllJobs, login,getAllTechnicians,getAllEmployers,postJob,
     updateTechnicianPhoto
 
 } = require('../controllers/mainController')
-const {  getAllOffers, getOfferById, getOfferByJobId, createOffer, acceptoffer} = require('../controllers/offerController')
+const {  getAllOffers, getOfferById, getOfferByJobId, createOffer, acceptoffer, getEmployment} = require('../controllers/offerController')
 
 const {uploadTechPhoto} = require('./multer/multer-utils');
 // const multer = require('multer');
@@ -20,6 +21,7 @@ router.route('/login').get(login);
 router.route('/jobs').get(getAllJobs).post(postJob);
 router.route('/jobs/:id').get(getAllJobs);
 
+router.route('/employment').get(getEmployment)
 
 router.route('/technicians').get(getAllTechnicians).post(createTechnician).patch(updateTechnicianPhoto,uploadTechPhoto);
 router.route('/technicians/:id').get().patch(uploadTechPhoto,updateTechnicianPhoto);
@@ -33,7 +35,8 @@ router.route('/offers/:id/accept').post(acceptoffer)
 //CHAT
 // router.route('/message').post(chat);
 
-
+router.route('/jobs/:id/clockin').post(clockIn)
+router.route('/jobs/:id/clockout').post(clockOut)
 
 
 module.exports = router;
