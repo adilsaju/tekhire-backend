@@ -25,8 +25,8 @@ const employmentSchema = new mongoose.Schema({
     default: null
    },
    employment_status:{
-    type: Number,
-    default:0
+    type: String,
+    default: "started"
    }
    
    

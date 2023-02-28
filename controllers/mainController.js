@@ -57,7 +57,6 @@ const postJob = async (req, res, next) => {
       // employer: particularEmployer,
       title: req.body.title,
       description: req.body.description,
-      // status: 
       skills_required: req.body.skills_required,
       location: req.body.location,
       // prefer_start_date: req.body.prefer_start_date

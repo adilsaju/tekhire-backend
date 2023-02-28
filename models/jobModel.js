@@ -18,9 +18,9 @@ const jobSchema = new mongoose.Schema({
       type: String,
    },
    status:{
-      type: Number,
+      type: String,
      required:true,
-      default: 0
+      default: "new job"
    },
    // picture: {
    //    type: String,

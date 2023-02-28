@@ -173,7 +173,7 @@ const acceptoffer = async (req, res, next) => {
    )
    const upd2 = await job.jobModel.updateOne(
     { _id: particularJob._id },
-    { $set: { status: 1 } }
+    { $set: { status: "upcoming" } }
  )
    console.log("pppppp",particularJob._id)
    console.log(particularOffer)
