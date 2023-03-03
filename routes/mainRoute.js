@@ -4,7 +4,8 @@ const { getAllJobs, login,getAllTechnicians,getAllEmployers,postJob,
     createTechnician,
     createEmployer,
 
-    updateTechnicianPhoto
+    updateTechnicianPhoto,
+    getJobsByEmployerId
 
 } = require('../controllers/mainController')
 const {  getAllOffers, getOfferById, getOfferByJobId, createOffer, acceptoffer, getEmployment} = require('../controllers/offerController')
@@ -20,6 +21,7 @@ router.route('/login').get(login);
 
 router.route('/jobs').get(getAllJobs).post(postJob);
 router.route('/jobs/:id').get(getAllJobs);
+router.route('/employer/:id/jobs').get(getJobsByEmployerId)
 
 router.route('/employments').get(getEmployment)
 
@@ -30,7 +32,7 @@ router.route('/employers').get(getAllEmployers).post(createEmployer);
 
 router.route('/offers').get(getAllOffers).post(createOffer);
 router.route('/offers/:id').get(getOfferById);
-router.route('/jobs/:id/offers').get(getOfferByJobId);
+router.route('/job/:id/offers').get(getOfferByJobId);
 router.route('/offers/:id/accept').post(acceptoffer)
 //CHAT
 // router.route('/message').post(chat);

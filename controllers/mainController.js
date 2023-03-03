@@ -38,6 +38,42 @@ const getAllJobs = async (req, res, next) => {
   }
 };
 
+const getJobsByEmployerId =  async(req,res,next) =>{
+
+  console.log('getJobsByEmployerId()');
+  
+  try {
+    const employerId = req.params.id;
+    console.log("employerId", employerId)
+    if (
+      employerId === null ||
+      employerId === undefined ||
+      employerId === ''
+    ) {
+      res
+        .status(500)
+        .json({
+          message: 'no employer ID found'
+        });
+
+      return;
+    }
+
+    const abc = await job.jobModel.find({
+      'employer': employerId,
+    });
+
+    res.json(abc);
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        error: true,
+        message: error.message
+      });
+  }
+}
+
 const postJob = async (req, res, next) => {
 
   console.log('postJob()');
@@ -49,12 +85,12 @@ const postJob = async (req, res, next) => {
 
   const particularEmployer =
     await employer.employerModel.findById(
-      req.body.employerId
+      '63f1b9adcf55c1d5b65f58ad'
     );
   try {
     //create obj
     const jobObj = {
-      // employer: particularEmployer,
+      employer: particularEmployer,
       title: req.body.title,
       description: req.body.description,
       skills_required: req.body.skills_required,
@@ -234,6 +270,7 @@ module.exports = {
   postJob,
   createTechnician,
   createEmployer,
-  updateTechnicianPhoto
+  updateTechnicianPhoto,
+  getJobsByEmployerId
 
 }
