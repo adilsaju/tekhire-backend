@@ -91,6 +91,44 @@ const getAllOffers = async (req, res, next) => {
     }
   };
 
+  const getOfferByTechnicianId = async (req, res, next) => {
+  
+    console.log('getOfferByTechnicianId()');
+  
+    try {
+      const TechnicianId = req.params.id;
+      console.log("jobId", TechnicianId)
+      if (
+        TechnicianId === null ||
+        TechnicianId === undefined ||
+        TechnicianId === ''
+      ) {
+        res
+          .status(500)
+          .json({
+            message: 'no job ID found'
+          });
+  
+        return;
+      }
+  
+      const abc = await offer.offerModel.find({
+        'technician_who_offered': TechnicianId,
+      }).sort({
+        offer_date: 1
+      }).populate("jobID").populate("technician_who_offered");
+  
+      res.json(abc);
+    } catch (error) {
+      res
+        .status(500)
+        .json({
+          error: true,
+          message: error.message
+        });
+    }
+  };
+
   
 const createOffer = async (req, res, next) => {
 
@@ -103,10 +141,14 @@ const createOffer = async (req, res, next) => {
     await technician.technicianModel.findById(
       req.body.technicianId
     );
+    
     const particularJob =
     await job.jobModel.findById(
       req.body.jobID
     );
+
+
+
   try {
 
     const offerObj = {
@@ -123,6 +165,10 @@ const createOffer = async (req, res, next) => {
       offerObj
     );
 
+ const upd = await job.jobModel.updateOne(
+      { _id: req.body.jobID },
+      { $set: { status: 'offered' } }
+   )
 
     res.json(offer1);
     return
@@ -142,6 +188,10 @@ const acceptoffer = async (req, res, next) => {
 
   console.log(req.body);
 
+  const particularTechnician =
+    await offer.offerModel.findById(
+      req.body.technician_id
+    );
 
   const particularOffer =
     await offer.offerModel.findById(
@@ -154,13 +204,13 @@ const acceptoffer = async (req, res, next) => {
     
 // return
     
- if (!particularOffer.isAccepted){
+ if (particularOffer.offerStatus == 'pending'){
   try {
 
     const employmentObj = {
         offer_id:particularOffer,
         start_date:particularOffer.prefer_start_date,
-       
+        technician_accepted:particularTechnician
     };
     //update in db
     const offer1 = await employment.employmentModel.create(
@@ -169,12 +219,14 @@ const acceptoffer = async (req, res, next) => {
 
     const upd = await offer.offerModel.updateOne(
       { _id: req.body.offer_id },
-      { $set: { isAccepted: true } }
+      { $set: { offerStatus: 'upcoming' } }
    )
    const upd2 = await job.jobModel.updateOne(
     { _id: particularJob._id },
     { $set: { status: "upcoming" } }
  )
+
+
    console.log("pppppp",particularJob._id)
    console.log(particularOffer)
 
@@ -207,5 +259,6 @@ module.exports = {
     getOfferByJobId,
     getEmployment,
     createOffer,
-    acceptoffer
+    acceptoffer,
+    getOfferByTechnicianId
 }

@@ -27,8 +27,11 @@ const employmentSchema = new mongoose.Schema({
    employment_status:{
     type: String,
     default: "started"
+   },
+   technician_accepted:{
+      type: Schema.Types.ObjectId,
+      ref: "technician"
    }
-   
    
 })
 // studentSchema.index({ 'email' : 1 }, { unique: true });

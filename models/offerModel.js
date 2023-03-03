@@ -17,10 +17,10 @@ const offerSchema = new mongoose.Schema({
     type: Number,
     required:true
    },
-   isAccepted:{
-    type:Boolean,
+   offerStatus:{
+    type:String,
     required:true,
-    default: false
+    default: "pending"
    },
    technician_who_offered:{
     type: Schema.Types.ObjectId,

@@ -61,7 +61,7 @@ const getJobsByEmployerId =  async(req,res,next) =>{
 
     const abc = await job.jobModel.find({
       'employer': employerId,
-    });
+    }).populate("employer");
 
     res.json(abc);
   } catch (error) {
