@@ -5,7 +5,8 @@ const { getAllJobs, login,getAllTechnicians,getAllEmployers,postJob,
     createEmployer,
 
     updateTechnicianPhoto,
-    getJobsByEmployerId
+    getJobsByEmployerId,
+    getTechnicianById
 
 } = require('../controllers/mainController')
 const {  getAllOffers, getOfferById, getOfferByJobId, createOffer, acceptoffer, getEmployment} = require('../controllers/offerController')
@@ -26,7 +27,7 @@ router.route('/employer/:id/jobs').get(getJobsByEmployerId)
 router.route('/employments').get(getEmployment)
 
 router.route('/technicians').get(getAllTechnicians).post(createTechnician).patch(updateTechnicianPhoto,uploadTechPhoto);
-router.route('/technicians/:id').get().patch(uploadTechPhoto,updateTechnicianPhoto);
+router.route('/technicians/:id').get(getTechnicianById).patch(uploadTechPhoto,updateTechnicianPhoto);
 
 router.route('/employers').get(getAllEmployers).post(createEmployer);
 

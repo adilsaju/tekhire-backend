@@ -238,6 +238,18 @@ const saveToDb = async (id) => {
       // abc.save()
 }
 
+const getTechnicianById = async (req,res,next) => {
+
+  try {
+    const abc = await technician.technicianModel.findById(req.params.id);
+    res.json(abc)
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    });
+  }
+}
+
 const updateTechnicianPhoto = async (req,res,next) => {
   const file = req.file
 if (!file) {
@@ -271,6 +283,7 @@ module.exports = {
   createTechnician,
   createEmployer,
   updateTechnicianPhoto,
-  getJobsByEmployerId
+  getJobsByEmployerId,
+  getTechnicianById
 
 }
