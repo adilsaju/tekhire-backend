@@ -17,6 +17,11 @@ const jobSchema = new mongoose.Schema({
    description: {
       type: String,
    },
+   max_cost:{
+      type:Number,
+      required:true,
+      default:0
+   },
    status:{
       type: String,
      required:true,

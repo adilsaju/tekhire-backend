@@ -95,7 +95,8 @@ const postJob = async (req, res, next) => {
       description: req.body.description,
       skills_required: req.body.skills_required,
       location: req.body.location,
-      // prefer_start_date: req.body.prefer_start_date
+      max_cost:req.body.max_cost,
+      prefer_start_date: req.body.prefer_start_date
     };
     //update in db
     const job1 = await job.jobModel.create(
