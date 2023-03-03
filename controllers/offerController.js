@@ -78,7 +78,7 @@ const getAllOffers = async (req, res, next) => {
         'jobID': jobId,
       }).sort({
         offer_date: 1
-      });
+      }).populate("technician_who_offered");
   
       res.json(abc);
     } catch (error) {
