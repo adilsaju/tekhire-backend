@@ -26,11 +26,19 @@ const employmentSchema = new mongoose.Schema({
    },
    employment_status:{
     type: String,
-    default: "started"
+    default: "upcoming"
    },
    technician_accepted:{
       type: Schema.Types.ObjectId,
       ref: "technician"
+   },
+   job:{
+      type: Schema.Types.ObjectId,
+      ref: "job"
+   },
+   employer:{
+      type: Schema.Types.ObjectId,
+      ref: "employer"
    }
    
 })

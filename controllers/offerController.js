@@ -38,6 +38,21 @@ const getAllOffers = async (req, res, next) => {
       });
     }
   };
+
+  const getEmploymentbyTechnicianId = async (req, res, next) => {
+    console.log('getEmploymentbyTechnicianId()');
+    try {
+      // const abc = await Job.jobModel.find();
+      const abc = await employment.employmentModel.find({
+        'technician_accepted': req.params.id,
+      }).populate("technician_accepted").populate("offer_id").populate("job").populate("employer");
+      res.json(abc);
+    } catch (error) {
+      res.status(500).json({
+        message: error.message
+      });
+    }
+  }
   
   const getOfferById = async (req, res, next) => {
   
@@ -189,10 +204,13 @@ const acceptoffer = async (req, res, next) => {
   console.log(req.body);
 
   const particularTechnician =
-    await offer.offerModel.findById(
+    await technician.technicianModel.findById(
       req.body.technician_id
     );
-
+  const particularEmployer = 
+  await employer.employerModel.findById(
+    req.body.employer_id
+  );
   const particularOffer =
     await offer.offerModel.findById(
       req.body.offer_id
@@ -210,7 +228,9 @@ const acceptoffer = async (req, res, next) => {
     const employmentObj = {
         offer_id:particularOffer,
         start_date:particularOffer.prefer_start_date,
-        technician_accepted:particularTechnician
+        technician_accepted:particularTechnician,
+        employer:particularEmployer,
+        job:particularJob
     };
     //update in db
     const offer1 = await employment.employmentModel.create(
@@ -260,5 +280,6 @@ module.exports = {
     getEmployment,
     createOffer,
     acceptoffer,
-    getOfferByTechnicianId
+    getOfferByTechnicianId,
+    getEmploymentbyTechnicianId
 }

@@ -9,7 +9,7 @@ const { getAllJobs, login,getAllTechnicians,getAllEmployers,postJob,
     getTechnicianById
 
 } = require('../controllers/mainController')
-const {  getAllOffers, getOfferById, getOfferByJobId, createOffer, acceptoffer, getEmployment, getOfferByTechnicianId} = require('../controllers/offerController')
+const {  getAllOffers, getOfferById, getOfferByJobId, createOffer, acceptoffer, getEmployment, getOfferByTechnicianId, getEmploymentbyTechnicianId} = require('../controllers/offerController')
 
 const {uploadTechPhoto} = require('./multer/multer-utils');
 // const multer = require('multer');
@@ -43,5 +43,6 @@ router.route('/jobs/:id/clockin').post(clockIn)
 router.route('/jobs/:id/clockout').post(clockOut)
 router.route('/attendance').get(getAttendance)
 
+router.route('/technician/:id/employment').get(getEmploymentbyTechnicianId)
 
 module.exports = router;

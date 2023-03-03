@@ -24,13 +24,16 @@ db.once('open',()=>console.error('connected to database'))
 async function addData() {
 
     
-    // const job1 = await Job.jobModel.create({name: "plumbing"})
+    // const job1 = await Job.jobModel.create({title: "upcoming",description:"i am tarun up",posted_date:new Date()})
 
     // const job1 = await tehncician.technicianModel.create({name: "Rolan", email:"a4@gmail.com", password: "12345678" })
 
-    const job1 = await offer.offerModel.create({offerPrice: 300,jobID:'63ef008d43d9a5abeef994af', offerHours: 15, prefer_start_date:'2023-02-25T01:51:17.997+00:00'})
+    //const job1 = await offer.offerModel.create({offerPrice: 300,jobID:'63ef008d43d9a5abeef994af', offerHours: 15, prefer_start_date:'2023-02-25T01:51:17.997+00:00'})
+
+    // const job1 = await Job.jobModel.deleteMany({})
 
     // await job1.save()
+
     
     console.log("data2 added");
 
