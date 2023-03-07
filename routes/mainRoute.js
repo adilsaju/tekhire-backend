@@ -1,6 +1,6 @@
 const express = require('express');
 const { clockIn, clockOut, getAttendance } = require('../controllers/attendanceController');
-const { getAllJobs, login,getAllTechnicians,getAllEmployers,postJob,
+const { getAllJobs, test ,getAllTechnicians,getAllEmployers,postJob,
     createTechnician,
     createEmployer,
 
@@ -17,8 +17,8 @@ const {uploadTechPhoto} = require('./multer/multer-utils');
 
 const router = express.Router();
 
+router.route('/test').get(test);
 
-router.route('/login').get(login);
 
 router.route('/jobs').get(getAllJobs).post(postJob);
 router.route('/jobs/:id').get(getAllJobs);

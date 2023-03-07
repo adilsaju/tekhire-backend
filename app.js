@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const {addData} = require("./scripts/data-create");
 const mainRoute = require('./routes/mainRoute')
 const notificationRoute = require('./routes/notificationRoute')
+const authRoute = require('./routes/authRoute')
 
 
 
@@ -46,6 +47,8 @@ app.use(express.json())
 //router 
 app.use("/api/v1/", mainRoute)
 app.use("/api/v1/", notificationRoute)
+app.use("/api/v1/", authRoute)
+
 
 
 // app.use("/login", login)

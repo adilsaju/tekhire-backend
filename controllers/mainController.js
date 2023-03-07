@@ -10,8 +10,8 @@ const app = express();
 const router = express.Router();
 
 
-const login = async (req, res, next) => {
-  console.log("login");
+const test = async (req, res, next) => {
+  // console.log("login");
 
   // res.json("login")
   console.log("success");
@@ -276,7 +276,7 @@ console.log(abc);
 }
 
 module.exports = {
-  login,
+  test,
   getAllJobs,
   getAllTechnicians,
   getAllEmployers,
