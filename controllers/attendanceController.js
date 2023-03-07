@@ -36,8 +36,10 @@ const clockIn = async (req, res, next) => {
   
     const particularempnt =
       await employment.employmentModel.findById(
-        req.body.employment_id
+        req.params.id
       );
+    
+   
      
     try {
   
@@ -49,6 +51,14 @@ const clockIn = async (req, res, next) => {
       const offer1 = await attendance.dailyAttendanceModel.create(
         attendanceObj
       );
+      const attendancejob = await job.jobModel.updateOne(
+        {_id: req.body.job_id },
+        { $set: { status: 'ongoing' } }
+        )
+        const attendanceOffer = await offer.offerModel.updateOne(
+          {_id: req.body.offer_id },
+            { $set: { offerStatus: 'ongoing' } }
+          )
         
       
   
@@ -71,14 +81,14 @@ const clockIn = async (req, res, next) => {
   
     const particularempnt =
       await employment.employmentModel.findById(
-        req.body.employment_id
+        req.params.id
       );
     
 
     const pay_perhr = await offer.offerModel.findById(
         particularempnt.offer_id
       );
-    
+    console.log('seepr',pay_perhr)
       const hoursoc = await attendance.dailyAttendanceModel.findOne(
         {employment: particularempnt._id,clock_out:null }
       )
@@ -90,12 +100,12 @@ const clockIn = async (req, res, next) => {
       const attendance1 = await attendance.dailyAttendanceModel.updateOne(
        //time is set in hours
        {employment: particularempnt._id,clock_out:null },
-        { $set: { clock_out: new Date(),shift_duration:(((new Date())-hoursoc.clock_in)/3600000), shift_pay: (pay_perhr.offerPrice)*(((new Date())-hoursoc.clock_in)/3600000)} }
+        { $set: { clock_out: new Date(),shift_duration:(((new Date())-hoursoc.clock_in)/1000), shift_pay: (pay_perhr.offerPrice)*(((new Date())-hoursoc.clock_in)/3600000)} }
       )
 
       const emp1 =  await employment.employmentModel.updateOne(
-       { _id: req.body.employment_id},
-       { $set: {total_hours:(particularempnt.total_hours+(((new Date())-hoursoc.clock_in)/3600000)),total_income:particularempnt.total_income+(pay_perhr.offerPrice)*(((new Date())-hoursoc.clock_in)/3600000)}}
+       { _id: req.params.id},
+       { $set: {total_hours:(particularempnt.total_hours+(((new Date())-hoursoc.clock_in)/1000)),total_income:particularempnt.total_income+(pay_perhr.offerPrice)*(((new Date())-hoursoc.clock_in)/3600000)}}
       );
   
       

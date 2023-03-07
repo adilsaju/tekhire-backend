@@ -53,6 +53,21 @@ const getAllOffers = async (req, res, next) => {
       });
     }
   }
+
+  const getEmploymentbyOfferId = async (req, res, next) => {
+    console.log('getEmploymentbyOfferId()');
+    try {
+      // const abc = await Job.jobModel.find();
+      const abc = await employment.employmentModel.find({
+        'offer_id': req.params.id,
+      }).populate("technician_accepted").populate("offer_id").populate("job").populate("employer");
+      res.json(abc);
+    } catch (error) {
+      res.status(500).json({
+        message: error.message
+      });
+    }
+  }
   
   const getOfferById = async (req, res, next) => {
   
@@ -281,5 +296,6 @@ module.exports = {
     createOffer,
     acceptoffer,
     getOfferByTechnicianId,
-    getEmploymentbyTechnicianId
+    getEmploymentbyTechnicianId,
+    getEmploymentbyOfferId
 }
