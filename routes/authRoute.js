@@ -6,7 +6,7 @@ const router = express.Router();
 const { login, createTechnician, createClient } = require('../controllers/authController')
 
 
-router.route('/login').get(login);
+router.route('/login').post(login);
 
 //TODO:
 router.route('/createTechnician').post(createTechnician);
