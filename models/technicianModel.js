@@ -35,7 +35,7 @@ const technicianSchema = new mongoose.Schema({
       // required: true
    },
    skill_certificates: {
-      type: [],
+      type: [String],
       // required: true
    },
    picture: {
@@ -49,6 +49,11 @@ const technicianSchema = new mongoose.Schema({
    total_hours_worked: {
       type: Number,
       default: 0
+   },
+   address: {
+      type: String,
+      default: `Vancouver, BC
+       V5H 2K9`,
    },
 })
 technicianSchema.index({ 'email' : 1 }, { unique: true });

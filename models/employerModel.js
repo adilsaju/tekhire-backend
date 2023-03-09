@@ -33,6 +33,11 @@ const employerSchema = new mongoose.Schema({
       type: Date,
       default: Date.now
    },
+   address: {
+      type: String,
+      default: `Vancouver, BC
+       V5H 2K9`,
+   },
  })
 
  employerSchema.index({ 'email' : 1 }, { unique: true });
