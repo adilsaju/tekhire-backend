@@ -27,7 +27,7 @@ const jobSchema = new mongoose.Schema({
      required:true,
       default: "new job"
    },
-   picture: {
+   pictures: {
       type: [String],
       default: ["https://tekk-main.s3.us-west-2.amazonaws.com/1676798660245"]
    },
