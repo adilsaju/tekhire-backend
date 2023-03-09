@@ -19,7 +19,7 @@ const employerSchema = new mongoose.Schema({
     },
     picture: {
       type: String,
-      default: "https://storage.googleapis.com/yoke-e05d7.appspot.com/yoke%2F%2Faccount184822ff688.svg",
+      default: "https://tekk-main.s3.us-west-2.amazonaws.com/1676798660245",
       required: true
    },
    phone: {
