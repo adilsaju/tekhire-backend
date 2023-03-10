@@ -30,14 +30,13 @@ const uploadTechPhoto = multer({ storage: storage,
     }
   }
 
-//TODO:
   const uploadJobPhotos = multer({ storage: storage,
     // limits: { fieldSize: 10 * 1024 * 1024 },
     // limits: {fileSize: 10},
     fileFilter: function(req, file, cb){
       checkFileType(file,cb)
     }
-  }).single('image2');
+  }).array('images_ar', 10);
 
   
   function checkFileType(file, cb){

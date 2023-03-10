@@ -277,10 +277,10 @@ console.log(abc);
 
 const updateJobImages = async (req, res, next) => {
   console.log('updateJobImages()');
-  console.log(req.body);
+  console.log(req.params.id);
 
-  const file = req.file
-  if (!file) {
+  const files = req.files
+  if (!files) {
     const error = new Error('Please upload a file')
     error.httpStatusCode = 400
     return next(error)
@@ -288,15 +288,17 @@ const updateJobImages = async (req, res, next) => {
 
   const jobP =
     await job.jobModel.findById(
-      req.body.job_id
+      req.params.id
     );
 
-
+  jobP.images =  []
 
   try {
     //create obj
-    //TODO:
-    jobP.images = req.file.location;
+    for (let i =0; i< req.files.length; i++)
+    {
+      jobP.images.push(req.files[i].location);
+    }
 
     //update in db
     await jobP.save()
