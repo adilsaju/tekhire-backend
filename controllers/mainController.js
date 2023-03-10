@@ -85,7 +85,7 @@ const postJob = async (req, res, next) => {
 
   const particularEmployer =
     await employer.employerModel.findById(
-      '63f1b9adcf55c1d5b65f58ad'
+      req.body.client_id
     );
   try {
     //create obj
