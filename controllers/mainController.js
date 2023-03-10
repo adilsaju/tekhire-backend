@@ -275,6 +275,44 @@ console.log(abc);
   res.send(file)
 }
 
+const updateJobImages = async (req, res, next) => {
+  console.log('updateJobImages()');
+  console.log(req.body);
+
+  const file = req.file
+  if (!file) {
+    const error = new Error('Please upload a file')
+    error.httpStatusCode = 400
+    return next(error)
+  }
+
+  const jobP =
+    await job.jobModel.findById(
+      req.body.job_id
+    );
+
+
+
+  try {
+    //create obj
+    //TODO:
+    jobP.images = req.file.location;
+
+    //update in db
+    await jobP.save()
+
+
+    res.json(jobP);
+    return
+  } catch (error) {
+    res.json({
+      error: true,
+      message: error.message
+    });
+    return
+  }
+}
+
 module.exports = {
   test,
   getAllJobs,
@@ -285,6 +323,7 @@ module.exports = {
   createEmployer,
   updateTechnicianPhoto,
   getJobsByEmployerId,
-  getTechnicianById
+  getTechnicianById,
+  updateJobImages
 
 }

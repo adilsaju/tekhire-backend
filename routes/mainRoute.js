@@ -6,12 +6,13 @@ const { getAllJobs, test ,getAllTechnicians,getAllEmployers,postJob,
 
     updateTechnicianPhoto,
     getJobsByEmployerId,
-    getTechnicianById
+    getTechnicianById,
+    updateJobImages
 
 } = require('../controllers/mainController')
 const {  getAllOffers, getOfferById, getOfferByJobId, createOffer, acceptoffer, getEmployment, getOfferByTechnicianId, getEmploymentbyTechnicianId, getEmploymentbyOfferId} = require('../controllers/offerController')
 
-const {uploadTechPhoto} = require('./multer/multer-utils');
+const {uploadTechPhoto, uploadJobPhotos} = require('./multer/multer-utils');
 // const multer = require('multer');
 // const path = require('path');
 
@@ -22,11 +23,20 @@ router.route('/test').get(test);
 
 router.route('/jobs').get(getAllJobs).post(postJob);
 router.route('/jobs/:id').get(getAllJobs);
+
+
+
+
 router.route('/employer/:id/jobs').get(getJobsByEmployerId)
 
 router.route('/employments').get(getEmployment)
 
-router.route('/technicians').get(getAllTechnicians).post(createTechnician).patch(updateTechnicianPhoto,uploadTechPhoto);
+router.route('/technicians').get(getAllTechnicians).post(createTechnician)
+
+//IMAGES
+
+//post or update images
+router.route('/jobs/:id/images').patch(uploadJobPhotos,updateJobImages);
 router.route('/technicians/:id').get(getTechnicianById).patch(uploadTechPhoto,updateTechnicianPhoto);
 
 router.route('/employers').get(getAllEmployers).post(createEmployer);
