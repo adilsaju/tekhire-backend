@@ -2,12 +2,13 @@ const { S3Client } = require('@aws-sdk/client-s3')
 const multerS3 = require('multer-s3')
 let aws = require('aws-sdk')
 let multer = require('multer')
-const config = require("../../config.json")
+// const config = require("../../config.json")
+require('dotenv').config()
 
 
-aws.config.update({region: 'us-west-2',
-accessKeyId: config.aws.accessKey,
-secretAccessKey: config.aws.secretKey
+aws.config.update({region: process.env.AWS_REGION,
+accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 
 
 });

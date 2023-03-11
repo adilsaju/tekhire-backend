@@ -69,11 +69,11 @@ function init(server) {
 
 
       //get all now
-      respone = await chat.messageModel.find();
+      // respone = await chat.messageModel.find();
 
 
-      console.log(respone);
-      socket.to(data.room).emit("receive_message", respone);
+      // console.log(respone);
+      socket.to(data.room).emit("receive_message", data);
     });
 
     socket.on('disconnect', () => {
