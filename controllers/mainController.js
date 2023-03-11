@@ -3,11 +3,6 @@ const express = require('express');
 const job = require('../models/jobModel')
 const employer = require('../models/employerModel')
 const technician = require('../models/technicianModel');
-const offer = require('../models/offerModel')
-const socketServer = require('../socket2/socket-server');
-
-const app = express();
-const router = express.Router();
 
 
 const test = async (req, res, next) => {
