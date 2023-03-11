@@ -45,11 +45,7 @@ const employerSchema = require('./employerModel').employerSchema
 const Schema = mongoose.Schema
 
 const roomSchema = new mongoose.Schema({
-    id: {
-        type: Date,
-        required: true,
-        default: Date.now
-    },
+
     room: {
         type: String,
         required: true
@@ -78,7 +74,11 @@ const roomSchema = new mongoose.Schema({
 })
 
 const messageSchema = new mongoose.Schema({
-
+    id: {
+        type: Date,
+        required: true,
+        default: Date.now
+    },
     // Foreign key
     room_id: {
         type: Schema.Types.ObjectId,
@@ -115,5 +115,5 @@ module.exports = {
     roomSchema,
     roomModel: mongoose.model('room', roomSchema, 'room'),
     messageSchema,
-    chatModel: mongoose.model('message', messageSchema, 'message'),
+    messageModel: mongoose.model('message', messageSchema, 'message'),
 }

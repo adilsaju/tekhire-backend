@@ -1,4 +1,11 @@
 const socketio = require('socket.io');
+//
+const job = require('../models/jobModel')
+const employer = require('../models/employerModel')
+const technician = require('../models/technicianModel');
+const offer = require('../models/offerModel')
+const chat = require('../models/chatModel')
+
 
 let io;
 
@@ -12,18 +19,63 @@ function init(server) {
   io.on('connection', (socket) => {
     console.log(`User Connected: ${socket.id}`);
 
-
     socket.on("join_room", (data) => {
       socket.join(data);
       console.log(`User with ID: ${socket.id} joined room: ${data}`);
     });
   
-    socket.on("send_message", (data) => {
-      console.log(data);
-      socket.to(data.room).emit("receive_message", data);
+    socket.on("send_message", async (data) => {
+      //ADD TO DATABASE LOGIC
+      // room: "321",
+      // sender: tech_id,
+      // sender_type:"technician", //or employer
+      // job: propValue,
+      // message: tomessage,
+      // id: Date.now()
+
+
+  const   proom =      
+    await chat.roomModel.findById(
+      data.room_id
+    );
+
+  const   psender =      
+  await technician.technicianModel.findById(
+    data.sender
+  ) ||  await employer.employerModel.findById(
+    data.sender
+  )
+
+
+      //create message api 
+      const m1 = {
+        id: data.id,
+        room_id: proom,
+        sender_id: psender,
+        docModel: data.sender_type,
+        message: data.message
+       };
+
+
+       console.log("roomiee");
+       console.log(m1);
+
+       //update in db
+       const messageDb = await chat.messageModel.create(
+        m1
+      );
+
+      console.log("sucesssss", messageDb);
+
+
+      //get all now
+      respone = await chat.messageModel.find();
+
+
+      console.log(respone);
+      socket.to(data.room).emit("receive_message", respone);
     });
 
-    
     socket.on('disconnect', () => {
       console.log('user disconnected');
     });

@@ -7,7 +7,12 @@ const { getAllJobs, test ,getAllTechnicians,getAllEmployers,postJob,
     updateTechnicianPhoto,
     getJobsByEmployerId,
     getTechnicianById,
-    updateJobImages
+    updateJobImages,
+
+    createRoom,
+    deleteRoom,
+    getAllRooms,
+    getAllMessages
 
 } = require('../controllers/mainController')
 const {  getAllOffers, getOfferById, getOfferByJobId, createOffer, acceptoffer, getEmployment, getOfferByTechnicianId, getEmploymentbyTechnicianId, getEmploymentbyOfferId} = require('../controllers/offerController')
@@ -61,6 +66,18 @@ router.route('/offer/:id/employment').get(getEmploymentbyOfferId)
 
 
 /////
+router.route('/rooms').get(getAllRooms).delete(deleteRoom).post(createRoom)
+router.route('/messages').get(getAllMessages)
+
+
+
+
+
+
+
+
+
+
 
 // Configure the OAuth2Client with your client ID and secret
 const client = new OAuth2Client(
