@@ -6,6 +6,7 @@ const {addData} = require("./scripts/data-create");
 const mainRoute = require('./routes/mainRoute')
 const notificationRoute = require('./routes/notificationRoute')
 const authRoute = require('./routes/authRoute')
+const session = require('express-session');
 
 
 
@@ -43,6 +44,15 @@ app.use(cors())
 //middleware
 app.use(express.json())
 // app.disable('view cache');
+// Set up session middleware
+app.use(session({
+  secret: 'abcdefg',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
+
+
 
 //router 
 app.use("/api/v1/", mainRoute)
