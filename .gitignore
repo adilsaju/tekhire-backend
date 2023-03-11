@@ -8,4 +8,4 @@ awsconfiguration.json
 **.sample
 #amplify-do-not-edit-end
 config.json
-# .env
+.env
