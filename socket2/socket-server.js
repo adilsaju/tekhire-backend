@@ -56,7 +56,11 @@ function init(server) {
 
        console.log("roomiee");
        console.log(m1);
-
+       if (! m1.message)
+       {
+        console.log("msg cant be empty");
+        return
+       }
        //update in db
        const messageDb = await chat.messageModel.create(
         m1
@@ -76,7 +80,8 @@ function init(server) {
         room_id: data.room_id,
         sender_id: data.sender,
         docModel: data.sender_type,
-        message: data.message
+        message: data.message,
+        date: messageDb.date
        };
       socket.to(data.room).emit("receive_message", m2);
     });
