@@ -70,7 +70,15 @@ function init(server) {
 
 
       // console.log(respone);
-      socket.to(data.room).emit("receive_message", data);
+      //create message api 
+      const m2 = {
+        id: data.id,
+        room_id: data.room_id,
+        sender_id: data.sender,
+        docModel: data.sender_type,
+        message: data.message
+       };
+      socket.to(data.room).emit("receive_message", m2);
     });
 
     socket.on('disconnect', () => {
