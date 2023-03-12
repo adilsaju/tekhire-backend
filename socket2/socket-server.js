@@ -39,14 +39,11 @@ function init(server) {
       data.room_id
     );
 
-  const   psender =      
-  await technician.technicianModel.findById(
-    data.sender
-  ) ||  await employer.employerModel.findById(
-    data.sender
-  )
-
-
+    const   psender =    data.sender_type === "technician" ?  await technician.technicianModel.findById(
+      data.sender
+    ): await employer.employerModel.findById(
+      data.sender
+    )
       //create message api 
       const m1 = {
         id: data.id,
