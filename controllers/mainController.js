@@ -211,6 +211,29 @@ console.log(abc);
 
   res.send(file)
 }
+const updateEmployerPhoto = async (req,res,next) => {
+  const file = req.file
+if (!file) {
+  const error = new Error('Please upload a file')
+  error.httpStatusCode = 400
+  return next(error)
+}
+//
+const abc = await employer.employerModel.findById(req.params.id);
+console.log("abcccc");
+console.log(abc);
+console.log(file);
+
+
+// abc.picture = req.file.publicUrl;
+abc.picture = req.file.location;
+
+await abc.save()
+console.log(abc);
+
+
+  res.send(file)
+}
 
 
 
@@ -222,6 +245,7 @@ module.exports = {
   createTechnician,
   createEmployer,
   updateTechnicianPhoto,
+  updateEmployerPhoto,
   getTechnicianById,
 
 

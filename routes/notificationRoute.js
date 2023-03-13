@@ -8,8 +8,8 @@ const {  getAllOffers, getOfferById, getOfferByJobId, createOffer} = require('..
 const { 
     getTechNotificationById,
     postTechNotificationById,
-    // getEmpNotificationById,
-    // postEmpNotificationById
+    getEmpNotificationById,
+    postEmpNotificationById
 } = require('../controllers/notificationController')
 
 
@@ -21,7 +21,7 @@ const router = express.Router();
 
 
 router.route('/technicians/:id/notifications').get(getTechNotificationById).post(postTechNotificationById);
-// router.route('/employers/:id/notifications').get(getEmpNotificationById).post(postEmpNotificationById);
+router.route('/employers/:id/notifications').get(getEmpNotificationById).post(postEmpNotificationById);
 
 
 module.exports = router;
