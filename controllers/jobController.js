@@ -102,7 +102,49 @@ const getAllJobs = async (req, res, next) => {
       return
     }
   };
+  const editJob = async (req, res, next) => {
+    console.log('editJob()');
   
+    console.log(req.body);
+    // {
+    //   employerId: dmksadmlkd
+    // }
+  
+    // const pjob =
+    //   await job.jobModel.findById(
+    //     req.params.id
+    //   );
+    const jobId = req.params.id;
+
+
+      const pemp =
+      await employer.employerModel.findById(
+        req.body.employer
+      );
+    try {
+      //create obj
+      const jobObj = {
+        employer: pemp,
+        title: req.body.title,
+        description: req.body.description,
+        skills_required: req.body.skills_required,
+        location: req.body.location,
+        max_cost:req.body.max_cost,
+        prefer_start_date: req.body.prefer_start_date
+      };
+      //update in db
+        const job1 = await Job.updateOne({ _id: jobId }, jobObj);
+  
+        res.json(job1);
+      return
+    } catch (error) {
+      res.json({
+        error: true,
+        message: error.message
+      });
+      return
+    }
+  };
   const updateJobImages = async (req, res, next) => {
     console.log('updateJobImages()');
     console.log(req.params.id);
@@ -149,4 +191,5 @@ const getAllJobs = async (req, res, next) => {
     getAllJobs,
     postJob,
     updateJobImages,
+    editJob
   }

@@ -23,7 +23,7 @@ const {    createRoom,
   const {   getJobsByEmployerId,
     getAllJobs,
     postJob,
-    updateJobImages } = require('../controllers/jobController')
+    updateJobImages, editJob } = require('../controllers/jobController')
 
 
 const {uploadTechPhoto, uploadJobPhotos} = require('./multer/multer-utils');
@@ -39,7 +39,7 @@ router.route('/test').get(test);
 
 
 router.route('/jobs').get(getAllJobs).post(postJob);
-router.route('/jobs/:id').get(getAllJobs);
+router.route('/jobs/:id').get(getAllJobs).patch(editJob)
 
 
 
