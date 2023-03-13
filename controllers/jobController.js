@@ -106,16 +106,8 @@ const getAllJobs = async (req, res, next) => {
     console.log('editJob()');
   
     console.log(req.body);
-    // {
-    //   employerId: dmksadmlkd
-    // }
-  
-    // const pjob =
-    //   await job.jobModel.findById(
-    //     req.params.id
-    //   );
-    const jobId = req.params.id;
 
+    const jobId = req.params.id;
 
       const pemp =
       await employer.employerModel.findById(
@@ -133,7 +125,7 @@ const getAllJobs = async (req, res, next) => {
         prefer_start_date: req.body.prefer_start_date
       };
       //update in db
-        const job1 = await Job.updateOne({ _id: jobId }, jobObj);
+        const job1 = await job.jobModel.updateOne({ _id: jobId }, jobObj);
   
         res.json(job1);
       return
@@ -144,6 +136,25 @@ const getAllJobs = async (req, res, next) => {
       });
       return
     }
+  };
+
+  const deleteJob = async (req, res, next) => {
+    console.log('editJob()');
+  
+    console.log(req.body);
+
+    const jobId = req.params.id;
+
+    try {
+      const result = await job.jobModel.findByIdAndDelete(jobId);
+      if (!result) {
+        return res.status(404).json({ message: 'Job not found' });
+      }
+      res.status(200).json({ message: 'Job deleted' });
+    } catch (err) {
+      res.status(500).json({ message: 'Server error' });
+    }
+
   };
   const updateJobImages = async (req, res, next) => {
     console.log('updateJobImages()');
@@ -191,5 +202,6 @@ const getAllJobs = async (req, res, next) => {
     getAllJobs,
     postJob,
     updateJobImages,
-    editJob
+    editJob,
+    deleteJob
   }

@@ -285,8 +285,10 @@ const acceptoffer = async (req, res, next) => {
   
 }
 };
-
-  
+const editOffer = async (req, res, next) => {
+}
+const deleteOffer = async (req, res, next) => {
+}
 
 module.exports = {
     getAllOffers,
@@ -297,5 +299,7 @@ module.exports = {
     acceptoffer,
     getOfferByTechnicianId,
     getEmploymentbyTechnicianId,
-    getEmploymentbyOfferId
+    getEmploymentbyOfferId,
+    editOffer,
+    deleteOffer
 }

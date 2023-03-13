@@ -13,7 +13,7 @@ const {
 
 
 } = require('../controllers/mainController')
-const {  getAllOffers, getOfferById, getOfferByJobId, createOffer, acceptoffer, getEmployment, getOfferByTechnicianId, getEmploymentbyTechnicianId, getEmploymentbyOfferId} = require('../controllers/offerController')
+const {  getAllOffers, getOfferById, getOfferByJobId, createOffer, acceptoffer, getEmployment, getOfferByTechnicianId, getEmploymentbyTechnicianId, getEmploymentbyOfferId, editOffer, deleteOffer} = require('../controllers/offerController')
 
 const {    createRoom,
   deleteRoom,
@@ -23,7 +23,7 @@ const {    createRoom,
   const {   getJobsByEmployerId,
     getAllJobs,
     postJob,
-    updateJobImages, editJob } = require('../controllers/jobController')
+    updateJobImages, editJob, deleteJob } = require('../controllers/jobController')
 
 
 const {uploadTechPhoto, uploadJobPhotos} = require('./multer/multer-utils');
