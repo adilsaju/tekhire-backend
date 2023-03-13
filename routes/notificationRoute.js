@@ -10,7 +10,8 @@ const {
     postTechNotificationById,
     getEmpNotificationById,
     postEmpNotificationById,
-    postNotificationToAllTechnicians
+    postNotificationToAllTechnicians,
+    deleteNotificationById
 } = require('../controllers/notificationController')
 
 
@@ -24,6 +25,7 @@ const router = express.Router();
 router.route('/technicians/:id/notifications').get(getTechNotificationById).post(postTechNotificationById);
 router.route('/technicians/notifications').post(postNotificationToAllTechnicians);
 router.route('/employers/:id/notifications').get(getEmpNotificationById).post(postEmpNotificationById);
+router.route('/notifications/:id').delete(deleteNotificationById);
 
 
 module.exports = router;

@@ -208,11 +208,27 @@ const postNotificationToAllTechnicians = async (req, res, next) => {
   }
 };
 
+const deleteNotificationById = async (req, res, next) => {
+  console.log('deleteNotificationById()');
+  // console.log(req.body);
+  const nId = req.params.id;
+
+  try {
+    const result = await notification.notificationModel.findByIdAndDelete(nId);
+    if (!result) {
+      return res.status(404).json({ message: 'Job not found' });
+    }
+    res.status(200).json({ message: 'Job deleted' });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 module.exports = {
   getTechNotificationById,
   postTechNotificationById,
   getEmpNotificationById,
   postEmpNotificationById,
-  postNotificationToAllTechnicians
+  postNotificationToAllTechnicians,
+  deleteNotificationById
 }
