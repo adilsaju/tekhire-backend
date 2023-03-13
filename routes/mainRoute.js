@@ -6,10 +6,10 @@ const {
     createEmployer,
 
     updateTechnicianPhoto,
+    updateEmployerPhoto,
     getTechnicianById,
     getEmployerById,
-    getUserById,
-
+    getUserById
 
 
 } = require('../controllers/mainController')
@@ -57,7 +57,7 @@ router.route('/jobs/:id/images').patch(uploadJobPhotos,updateJobImages);
 router.route('/technicians/:id').get(getTechnicianById).patch(uploadTechPhoto,updateTechnicianPhoto);
 
 router.route('/employers').get(getAllEmployers).post(createEmployer);
-router.route('/employers/:id').get(getEmployerById)
+router.route('/employers/:id').get(getEmployerById).patch(uploadTechPhoto,updateEmployerPhoto);
 router.route('/users/:id').get(getUserById)
 
 // .patch(createEmployer);
