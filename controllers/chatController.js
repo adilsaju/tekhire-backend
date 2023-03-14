@@ -113,23 +113,26 @@ res.status(500).json({
 
 }
 
-const getAllMessages = async (req,res,next) => {
+const getAllMessages = async (req, res, next) => {
+  const roomId = req.params.id
+  // const proom = await chat.roomModel.findById(roomId)
+  console.log('getAllMessages()');
+  try {
+    let respone = null;
+    if (roomId) {
+      respone = await chat.messageModel.find({
+        "room_id": roomId
+      });
 
-console.log('getAllMessages()');
-try {
-let respone = null;
-if (req.params.id) {
-  respone = await chat.messageModel.findById(req.params.id);
-
-} else {
-  respone = await chat.messageModel.find();
-}
-res.json(respone);
-} catch (error) {
-res.status(500).json({
-  message: error.message
-});
-}
+    } else {
+      respone = await chat.messageModel.find();
+    }
+    res.json(respone);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    });
+  }
 
 }
 

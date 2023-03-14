@@ -83,7 +83,7 @@ router.route('/offer/:id/employment').get(getEmploymentbyOfferId)
 
 /////
 router.route('/rooms').get(getAllRooms).delete(deleteRoom).post(createRoom)
-router.route('/messages').get(getAllMessages)
+router.route('/rooms/:id/messages').get(getAllMessages)
 
 router.route('/technicians/:id/income_hours').get(getTehcnicianTotalIncomeHours)
 
