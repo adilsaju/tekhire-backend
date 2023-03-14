@@ -9,7 +9,9 @@ const {
     updateEmployerPhoto,
     getTechnicianById,
     getEmployerById,
-    getUserById
+    getUserById,
+
+    getTehcnicianTotalIncomeHours,
 
 
 } = require('../controllers/mainController')
@@ -82,6 +84,9 @@ router.route('/offer/:id/employment').get(getEmploymentbyOfferId)
 /////
 router.route('/rooms').get(getAllRooms).delete(deleteRoom).post(createRoom)
 router.route('/messages').get(getAllMessages)
+
+router.route('/technicians/:id/income_hours').get(getTehcnicianTotalIncomeHours)
+
 
 
 

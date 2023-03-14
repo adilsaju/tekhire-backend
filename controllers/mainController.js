@@ -5,6 +5,7 @@ const employer = require('../models/employerModel')
 const technician = require('../models/technicianModel');
 const offer = require('../models/offerModel')
 const chat = require('../models/chatModel')
+const employment = require('../models/employmentModel')
 
 
 
@@ -235,7 +236,29 @@ console.log(abc);
   res.send(file)
 }
 
+ const getTehcnicianTotalIncomeHours = async (req,res,next) => {
+  console.log("getTehcnicianTotalIncomeHours");
+  const techId = req.params.id
 
+  const emp1 = await employment.employmentModel.find({"technician_accepted": techId}).lean()
+
+  let totalH = 0
+  let totalI = 0
+
+  for (let i =0 ; i< emp1.length; i++)
+  {
+    totalH = totalH + emp1[i].total_hours
+  }
+  for (let i =0 ; i< emp1.length; i++)
+  {
+    totalI = totalI + emp1[i].total_income
+  }
+
+  res.json({
+    "income": totalI,
+    "hours": totalH
+  })
+}
 
 
 module.exports = {
@@ -250,6 +273,8 @@ module.exports = {
 
 
 getEmployerById,
-getUserById
+getUserById,
+
+getTehcnicianTotalIncomeHours,
 
 }
