@@ -27,40 +27,64 @@ const chat1 = async (req, res, next) => {
     }
   }
 
-  const createRoom = async (req,res,next) => {
+  const createRoom = async (req, res, next) => {
     //create room
-  // createRoom()
-  const pemp =
-  await employer.employerModel.findById(
-    req.body.employer
-  );
-  const ptech =
-  await technician.technicianModel.findById(
-    req.body.technician
-  );
-  const pjob =
-  await job.jobModel.findById(
-    req.body.job
-  );
-  console.log("gaaaaanddddddddddd");
-  console.log(pemp,ptech,pjob);
+    // createRoom()
+    try {
+      const pemp =
+        await employer.employerModel.findById(
+          req.body.employer
+        );
+      const ptech =
+        await technician.technicianModel.findById(
+          req.body.technician
+        );
+      const pjob =
+        await job.jobModel.findById(
+          req.body.job
+        );
+      console.log("gaaaaanddddddddddd");
+      console.log(pemp, ptech, pjob);
 
-  const room1 = {
-    room: "321",
-    employer_id: pemp,
-    technician_id: ptech,
-    job_id: pjob,
-    // room_created: Date.now
-   };
-   console.log("roomiee");
-   console.log(room1);
+      const room1 = {
+        room: "321",
+        employer_id: pemp,
+        technician_id: ptech,
+        job_id: pjob,
+        // room_created: Date.now
+      };
+      console.log("roomiee");
+      console.log(room1);
 
-   //update in db
-   const roomDb = await chat.roomModel.create(
-    room1
-  );
-   res.json(roomDb);
-}
+      if (ptech===null||pemp===null||pjob===null)
+      {
+        throw("cant be empty")
+      }
+
+      //check if room exists before creations
+      const json1 = await chat.roomModel.find({
+        "job_id": pjob,
+        "technician_id": ptech
+      }).populate("job_id").populate("technician_id").populate("employer_id")
+
+      if (json1.length == 0) {
+        //  update in db
+        const roomDb = await chat.roomModel.create(
+          room1
+        );
+        res.json(roomDb)
+      } else {
+        console.log("not needed");
+        res.json(json1[0])
+
+      }
+      //  res.json(json1);
+    } catch (error) {
+      res.status(500).json({
+        message: error.message
+      });
+    }
+  }
 
 const deleteRoom = async (req,res,next) => {
 
