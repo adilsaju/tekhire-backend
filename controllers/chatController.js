@@ -47,7 +47,7 @@ const chat1 = async (req, res, next) => {
       console.log(pemp, ptech, pjob);
 
       const room1 = {
-        room: "321",
+        // room: "321",
         employer_id: pemp,
         technician_id: ptech,
         job_id: pjob,

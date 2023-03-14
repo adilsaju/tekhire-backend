@@ -48,7 +48,7 @@ const roomSchema = new mongoose.Schema({
 
     room: {
         type: String,
-        required: true
+        // required: true
     },
     // or reference
     employer_id: {
