@@ -7,7 +7,6 @@ const offer = require('../models/offerModel')
 const chat = require('../models/chatModel')
 const employment = require('../models/employmentModel')
 // require('dotenv').config()
-const fetchi = await import('node-fetch');
 
 
 
@@ -267,6 +266,8 @@ console.log(abc);
 
 
 const getCompletions = async (req,res,next) => {
+  const fetchi = await import('node-fetch');
+
   console.log("getCompletions");
   const body = {
     prompt: req.body.message,
