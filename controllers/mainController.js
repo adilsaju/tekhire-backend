@@ -6,6 +6,7 @@ const technician = require('../models/technicianModel');
 const offer = require('../models/offerModel')
 const chat = require('../models/chatModel')
 const employment = require('../models/employmentModel')
+// require('dotenv').config()
 
 
 
@@ -261,6 +262,33 @@ console.log(abc);
 }
 
 
+
+
+
+const getCompletions = async (req,res,next) => {
+  console.log("getCompletions");
+  const body = {
+    prompt: req.body.message,
+    max_tokens: 64,
+    n: 5,
+    // stop: ['\n'],
+    model: "text-davinci-002"
+  }
+  const response = await fetch('https://api.openai.com/v1/completions', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify(body),
+});
+const data = await response.json();
+
+res.json(data)
+
+}
+
+
 module.exports = {
   test,
   getAllTechnicians,
@@ -276,5 +304,6 @@ getEmployerById,
 getUserById,
 
 getTehcnicianTotalIncomeHours,
+getCompletions
 
 }

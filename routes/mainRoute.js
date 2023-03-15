@@ -12,7 +12,7 @@ const {
     getUserById,
 
     getTehcnicianTotalIncomeHours,
-
+    getCompletions
 
 } = require('../controllers/mainController')
 const {  getAllOffers, getOfferById, getOfferByJobId, createOffer, acceptoffer, getEmployment, getOfferByTechnicianId, getEmploymentbyTechnicianId, getEmploymentbyOfferId, editOffer, deleteOffer} = require('../controllers/offerController')
@@ -87,6 +87,7 @@ router.route('/rooms/:id/messages').get(getAllMessages)
 
 router.route('/technicians/:id/income_hours').get(getTehcnicianTotalIncomeHours)
 
+router.route('/openai/completions').post(getCompletions)
 
 
 
