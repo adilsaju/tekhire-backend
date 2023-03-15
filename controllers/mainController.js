@@ -7,7 +7,7 @@ const offer = require('../models/offerModel')
 const chat = require('../models/chatModel')
 const employment = require('../models/employmentModel')
 // require('dotenv').config()
-const fetch = require('node-fetch');
+const fetchi = require('node-fetch');
 
 
 
@@ -275,7 +275,7 @@ const getCompletions = async (req,res,next) => {
     // stop: ['\n'],
     model: "text-davinci-002"
   }
-  const response = await fetch('https://api.openai.com/v1/completions', {
+  const response = await fetchi('https://api.openai.com/v1/completions', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
