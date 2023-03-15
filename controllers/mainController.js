@@ -7,6 +7,7 @@ const offer = require('../models/offerModel')
 const chat = require('../models/chatModel')
 const employment = require('../models/employmentModel')
 // require('dotenv').config()
+const fetch = require('node-fetch');
 
 
 
