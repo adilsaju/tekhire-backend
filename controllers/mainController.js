@@ -270,6 +270,8 @@ const getCompletions = async (req,res,next) => {
   const fetchi = await import('node-fetch');
 
   console.log("getCompletions");
+  console.log("maessageeeeeee");
+  console.log(req.body.message);
   const body = {
     prompt: req.body.message,
     temperature: 0.7,
