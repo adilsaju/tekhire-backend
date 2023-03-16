@@ -258,7 +258,7 @@ const acceptoffer = async (req, res, next) => {
    )
    const upd2 = await job.jobModel.updateOne(
     { _id: particularJob._id },
-    { $set: { status: "upcoming" } }
+    { $set: { status: "upcoming", start_date: particularOffer.prefer_start_date} }
  )
 
 
