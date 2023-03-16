@@ -7,6 +7,7 @@ const {
   create_Client_Technician,
 } = require('../controllers/authController');
 
+const middleware = require('../middlewares/authMiddleware');
 const testing = async (req, res, next) => {
   // console.log("login");
 

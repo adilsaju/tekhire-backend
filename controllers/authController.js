@@ -57,7 +57,41 @@ const createHashPassword = async (password) => {
   return hashPassword;
 };
 
-const login = async (req, res) => {};
+const login = async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  try {
+    const decodeValue = await admin.auth().verifyIdToken(token);
+
+    if (decodeValue) {
+      const technicianUser = await technician.technicianModel.findOne({
+        firebase_uid: decodeValue.uid,
+      });
+
+      const clientUser = await employer.employerModel.findOne({
+        firebase_uid: decodeValue.uid,
+      });
+
+      if (technicianUser) {
+        return res.status(201).json({
+          error: false,
+          message: 'user logged in',
+          data: { user: technicianUser },
+        });
+      }
+
+      if (clientUser) {
+        return res.status(201).json({
+          error: false,
+          message: 'user logged in',
+          data: { user: clientUser },
+        });
+      }
+    }
+    return res.json({ message: 'Un authorize' });
+  } catch (e) {
+    return res.json({ message: 'Internal Error' });
+  }
+};
 
 module.exports = {
   login,
