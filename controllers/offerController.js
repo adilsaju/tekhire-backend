@@ -196,10 +196,10 @@ const createOffer = async (req, res, next) => {
     );
 
  const upd = await job.jobModel.updateOne(
-      { _id: req.body.jobID },
-      { $set: { status: 'offered' } }
+  { _id: req.body.jobID },
+  { $set: { status: 'offered' }, $inc: { countOffer: 1 } }
    )
-
+  
     res.json(offer1);
     return
   } catch (error) {
