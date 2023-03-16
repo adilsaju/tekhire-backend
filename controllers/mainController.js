@@ -272,6 +272,7 @@ const getCompletions = async (req,res,next) => {
   console.log("getCompletions");
   const body = {
     prompt: req.body.message,
+    temperature: 0.7,
     max_tokens: 64,
     n: 5,
     // stop: ['\n'],
