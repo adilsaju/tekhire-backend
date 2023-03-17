@@ -74,7 +74,7 @@ const getAllOffers = async (req, res, next) => {
     console.log('getOfferbyId()');
     try {
       // const abc = await Job.jobModel.find();
-      const abc = await offer.offerModel.findById(req.params.id);
+      const abc = await offer.offerModel.findById(req.params.id).populate("jobID");
       res.json(abc);
     } catch (error) {
       res.status(500).json({
