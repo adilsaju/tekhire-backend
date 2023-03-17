@@ -74,7 +74,7 @@ const getAllOffers = async (req, res, next) => {
     console.log('getOfferbyId()');
     try {
       // const abc = await Job.jobModel.find();
-      const abc = await offer.offerModel.findById(req.params.id);
+      const abc = await offer.offerModel.findById(req.params.id).populate("jobID");
       res.json(abc);
     } catch (error) {
       res.status(500).json({
@@ -196,10 +196,10 @@ const createOffer = async (req, res, next) => {
     );
 
  const upd = await job.jobModel.updateOne(
-      { _id: req.body.jobID },
-      { $set: { status: 'offered' } }
+  { _id: req.body.jobID },
+  { $set: { status: 'offered' }, $inc: { countOffer: 1 } }
    )
-
+  
     res.json(offer1);
     return
   } catch (error) {
@@ -258,7 +258,7 @@ const acceptoffer = async (req, res, next) => {
    )
    const upd2 = await job.jobModel.updateOne(
     { _id: particularJob._id },
-    { $set: { status: "upcoming" } }
+    { $set: { status: "upcoming", start_date: particularOffer.prefer_start_date} }
  )
 
 

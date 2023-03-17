@@ -102,7 +102,7 @@ if (req.params.id) {
   respone = await chat.roomModel.findById(req.params.id);
 
 } else {
-  respone = await chat.roomModel.find();
+  respone = await chat.roomModel.find().populate("technician_id").populate("employer_id").populate("job_id");
 }
 res.json(respone);
 } catch (error) {

@@ -29,7 +29,7 @@ const jobSchema = new mongoose.Schema({
    },
    images: {
       type: [String],
-      default: ["https://tekk-main.s3.us-west-2.amazonaws.com/1676798660245"]
+      default: ["https://dummyimage.com/600x400/666666/c4c4c4&text=No+Image+found"]
    },
    skills_required: {
       type: [String]
@@ -59,6 +59,15 @@ const jobSchema = new mongoose.Schema({
    },
    phone: {
       type: String,
+   },
+   countOffer:{
+      type:Number,
+      default:0
+
+   },
+   start_date:{
+      type:Date,
+      default:null
    }
    
 })
