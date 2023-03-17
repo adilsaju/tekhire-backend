@@ -1,9 +1,12 @@
 const express = require('express');
 const employer = require('../models/employerModel');
 const technician = require('../models/technicianModel');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const admin = require('../config/firebase.config');
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client(
+  '289621286274-3oa8fkftfdi17amo8c550bk0c98p5s8n.apps.googleusercontent.com'
+);
 
 const create_Client_Technician = async (req, res, next) => {
   try {
@@ -50,9 +53,7 @@ const create_Client_Technician = async (req, res, next) => {
 };
 
 const createHashPassword = async (password) => {
-  // const salt = await bcrypt.genSalt()
   const hashPassword = await bcrypt.hash(password, 10);
-  // console.log("salt", salt);
   console.log('hashPassword', hashPassword);
   return hashPassword;
 };
@@ -93,62 +94,108 @@ const login = async (req, res) => {
   }
 };
 
+const google_User_Login = async (req, res, nex) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    async function verify() {
+      const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience:
+          '289621286274-3oa8fkftfdi17amo8c550bk0c98p5s8n.apps.googleusercontent.com',
+      });
+      const { email, name, picture, sub: googleid } = ticket.getPayload();
+
+      console.log(email);
+      const role_type = req.body.role_type;
+      console.log(req.body);
+
+      if (role_type === 'technician') {
+        const technicianUser = await technician.technicianModel.create({
+          name: name,
+          email: email,
+          google_uid: googleid,
+          role_type: role_type,
+        });
+
+        return res.status(201).json({
+          error: false,
+          message: 'user added success',
+          data: technicianUser,
+        });
+      } else {
+        const clientUser = await employer.employerModel.create({
+          name: name,
+          email: email,
+          google_uid: googleid,
+          role_type: role_type,
+        });
+
+        return res.status(201).json({
+          error: false,
+          message: 'user added success',
+          data: clientUser,
+        });
+      }
+    }
+
+    verify().catch((error) => {
+      return res.json({ message: 'Unauthorize' });
+    });
+  } catch (e) {
+    return res.json({ message: 'Internal Error' });
+  }
+};
+
+const google_Login = async (req, res, nex) => {
+  const token = req.headers.authorization.split(' ')[1];
+  async function verify() {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience:
+        '289621286274-3oa8fkftfdi17amo8c550bk0c98p5s8n.apps.googleusercontent.com',
+    });
+    const { email, name, picture, sub: googleid } = ticket.getPayload();
+
+    const technicianUser = await technician.technicianModel.findOne({
+      google_uid: googleid,
+    });
+
+    const clientUser = await employer.employerModel.findOne({
+      google_uid: googleid,
+    });
+
+    if (technicianUser) {
+      return res.status(201).json({
+        error: false,
+        message: 'user available',
+        data: { user: technicianUser },
+      });
+    }
+
+    if (clientUser) {
+      return res.status(201).json({
+        error: false,
+        message: 'user available',
+        data: { user: clientUser },
+      });
+    }
+
+    return res.status(201).json({
+      error: false,
+      message: 'usernotindb',
+      data: {},
+    });
+  }
+
+  verify().catch((error) => {
+    return res.json({ message: 'Unauthorize' });
+  });
+};
+
 module.exports = {
   login,
   create_Client_Technician,
   createHashPassword,
+  google_Login,
+  google_User_Login,
 };
-
-/*
-console.log('login()');
-  user = req.body;
-
-  const token = await jwt.sign({ user }, 'secretkey', { expiresIn: '30000m' });
-
-  const studentUser = await technician.technicianModel.findOne({
-    email: req.body.email,
-  });
-
-  const adminUser = await employer.employerModel.findOne({
-    email: req.body.email,
-  });
-
-  if (studentUser != null) {
-    try {
-      if (await bcrypt.compare(req.body.password, studentUser.password)) {
-        console.log('scc');
-        res.send({
-          error: false,
-          message: 'login success',
-          data: studentUser,
-          token: token,
-          isTechnician: true,
-        });
-      } else {
-        console.log('pwd incorrect');
-        res.json({ error: true, message: 'Not allowed. Password incorrect' });
-      }
-    } catch (error) {
-      return res.status(500).json(error);
-    }
-  } else if (adminUser != null) {
-    try {
-      if (await bcrypt.compare(req.body.password, adminUser.password)) {
-        console.log('scc');
-        res.send({
-          error: false,
-          message: 'login success',
-          data: adminUser,
-          token: token,
-          isTechnician: false,
-        });
-      } else {
-        console.log('pwd incorrect');
-        res.json({ error: true, message: 'Not allowed. Password incorrect' });
-      }
-    } catch (error) {
-      return res.status(500).json(error);
-    }
-  } else {
-    return res.status(400).send({ error: true, message: 'cannot find email' });
-  } */

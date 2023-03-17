@@ -35,6 +35,10 @@ const employerSchema = new mongoose.Schema({
   firebase_uid: {
     type: String,
   },
+  google_uid: {
+    type: String,
+    default: '',
+  },
   role_type: {
     type: String,
     default: '',

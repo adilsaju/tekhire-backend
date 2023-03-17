@@ -51,6 +51,11 @@ const technicianSchema = new mongoose.Schema({
   },
   firebase_uid: {
     type: String,
+    default: '',
+  },
+  google_uid: {
+    type: String,
+    default: '',
   },
   role_type: {
     type: String,
