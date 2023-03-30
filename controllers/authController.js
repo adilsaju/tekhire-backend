@@ -20,6 +20,7 @@ const create_Client_Technician = async (req, res, next) => {
       const technicianUser = await technician.technicianModel.create({
         name: name,
         email: email,
+        password: req.body.password,
         firebase_uid: firebase_uid,
         phone: phone,
         role_type: role_type,
@@ -34,6 +35,7 @@ const create_Client_Technician = async (req, res, next) => {
       const clientUser = await employer.employerModel.create({
         name: name,
         email: email,
+        password: req.body.password,
         firebase_uid: firebase_uid,
         phone: phone,
         role_type: role_type,
@@ -113,6 +115,7 @@ const google_User_Login = async (req, res, nex) => {
         const technicianUser = await technician.technicianModel.create({
           name: name,
           email: email,
+          password: 'randompassword',
           google_uid: googleid,
           role_type: role_type,
         });
@@ -126,6 +129,7 @@ const google_User_Login = async (req, res, nex) => {
         const clientUser = await employer.employerModel.create({
           name: name,
           email: email,
+          password: 'randompassword',
           google_uid: googleid,
           role_type: role_type,
         });

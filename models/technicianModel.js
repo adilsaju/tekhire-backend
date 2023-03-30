@@ -16,6 +16,12 @@ const technicianSchema = new mongoose.Schema({
   password: {
     type: String,
   },
+  company: {
+    type: String,
+  },
+  experience: {
+    type: Number,
+  },
   income: {
     type: String,
     // required: true
