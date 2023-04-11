@@ -1,4 +1,5 @@
 const express = require('express');
+const {protect} = require('../middlewares/authMiddleware')
 const { clockIn, clockOut, getAttendance } = require('../controllers/attendanceController');
 const {
    test ,getAllTechnicians,getAllEmployers,
@@ -40,54 +41,54 @@ const router = express.Router();
 router.route('/test').get(test);
 
 
-router.route('/jobs').get(getAllJobs).post(postJob);
-router.route('/jobs/:id').get(getAllJobs).patch(editJob)
+router.route('/jobs').get(protect,getAllJobs).post(protect,postJob);
+router.route('/jobs/:id').get(protect,getAllJobs).patch(protect,editJob)
 
 
 
 
-router.route('/employer/:id/jobs').get(getJobsByEmployerId)
+router.route('/employer/:id/jobs').get(protect,getJobsByEmployerId)
 
-router.route('/employments').get(getEmployment)
+router.route('/employments').get(protect,getEmployment)
 
-router.route('/technicians').get(getAllTechnicians).post(createTechnician)
+router.route('/technicians').get(protect,getAllTechnicians).post(protect,createTechnician)
 
 //IMAGES
 
 //post or update images
-router.route('/jobs/:id/images').patch(uploadJobPhotos,updateJobImages);
-router.route('/technicians/:id').get(getTechnicianById).patch(uploadTechPhoto,updateTechnicianPhoto);
+router.route('/jobs/:id/images').patch(protect,uploadJobPhotos,updateJobImages);
+router.route('/technicians/:id').get(protect,getTechnicianById).patch(protect,uploadTechPhoto,updateTechnicianPhoto);
 
-router.route('/employers').get(getAllEmployers).post(createEmployer);
-router.route('/employers/:id').get(getEmployerById).patch(uploadTechPhoto,updateEmployerPhoto);
-router.route('/users/:id').get(getUserById)
+router.route('/employers').get(protect,getAllEmployers).post(protect,createEmployer);
+router.route('/employers/:id').get(protect,getEmployerById).patch(protect,uploadTechPhoto,updateEmployerPhoto);
+router.route('/users/:id').get(protect,getUserById)
 
 // .patch(createEmployer);
 
 
-router.route('/offers').get(getAllOffers).post(createOffer);
-router.route('/offers/:id').get(getOfferById);
-router.route('/job/:id/offers').get(getOfferByJobId);
-router.route('/offers/:id/accept').post(acceptoffer)
-router.route('/technician/:id/offers').get(getOfferByTechnicianId)
+router.route('/offers').get(protect,getAllOffers).post(protect,createOffer);
+router.route('/offers/:id').get(protect,getOfferById);
+router.route('/job/:id/offers').get(protect,getOfferByJobId);
+router.route('/offers/:id/accept').post(protect,acceptoffer)
+router.route('/technician/:id/offers').get(protect,getOfferByTechnicianId)
 //CHAT
 // router.route('/message').post(chat);
 
-router.route('/jobs/:id/clockin').post(clockIn)
-router.route('/jobs/:id/clockout').post(clockOut)
-router.route('/attendance').get(getAttendance)
+router.route('/jobs/:id/clockin').post(protect,clockIn)
+router.route('/jobs/:id/clockout').post(protect,clockOut)
+router.route('/attendance').get(protect,getAttendance)
 
-router.route('/technician/:id/employment').get(getEmploymentbyTechnicianId)
-router.route('/offer/:id/employment').get(getEmploymentbyOfferId)
+router.route('/technician/:id/employment').get(protect,getEmploymentbyTechnicianId)
+router.route('/offer/:id/employment').get(protect,getEmploymentbyOfferId)
 
 
 /////
-router.route('/rooms').get(getAllRooms).delete(deleteRoom).post(createRoom)
-router.route('/rooms/:id/messages').get(getAllMessages)
+router.route('/rooms').get(protect,getAllRooms).delete(protect,deleteRoom).post(protect,createRoom)
+router.route('/rooms/:id/messages').get(protect,getAllMessages)
 
-router.route('/technicians/:id/income_hours').get(getTehcnicianTotalIncomeHours)
+router.route('/technicians/:id/income_hours').get(protect,getTehcnicianTotalIncomeHours)
 
-router.route('/openai/completions').post(getCompletions)
+router.route('/openai/completions').post(protect,getCompletions)
 
 
 

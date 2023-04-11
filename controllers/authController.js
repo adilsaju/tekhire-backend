@@ -101,14 +101,13 @@ const login = async (req, res) => {
     //jwt sign
 
       console.log('login()');
+      console.log(req.body.email);
       user = req.body
 
-     const token =  await jwt.sign({user}, 'secretkey' , {expiresIn: '30000m' }) ;
-    
-
-
+     //const token =  await jwt.sign({user}, 'secretkey' , {expiresIn: '30000m' }) ;
 
     const studentUser = await technician.technicianModel.findOne({
+      //email: req.body.email,
       email: req.body.email,
     });
 
@@ -126,7 +125,7 @@ const login = async (req, res) => {
         )
       ) {
         console.log("scc");
-        res.send({error: false, message: 'login success' , data: studentUser, token: token, isTechnician: true });
+        res.send({error: false, message: 'login success' , data: studentUser, token: generateToken(studentUser._id), isTechnician: true });
       } else {
         console.log("pwd incorrect");
         res.json({error: true, message: 'Not allowed. Password incorrect' });
@@ -146,7 +145,7 @@ const login = async (req, res) => {
         )
       ) {
         console.log("scc");
-        res.send({error: false, message: 'login success' , data: adminUser, token: token, isTechnician: false });
+        res.send({error: false, message: 'login success' , data: adminUser, token: generateToken(adminUser._id), isTechnician: false });
       } else {
         console.log("pwd incorrect");
         res.json({error: true, message: 'Not allowed. Password incorrect' });
@@ -168,11 +167,12 @@ const login = async (req, res) => {
 };
 
 
-
-
-
-
-
+// Generate JWT
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: '30d',
+  })
+}
 
 
 
