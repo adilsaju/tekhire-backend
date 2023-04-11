@@ -17,7 +17,7 @@ const testing = async (req, res, next) => {
 };
 
 router.route('/works').get(testing);
-router.route('/login', middleware.decodeToken).post(login);
+router.route('/login').post(login);
 router.route('/register').post(create_Client_Technician);
 router.route('/google-login').post(google_Login);
 router.route('/google-user-login').post(google_User_Login);
