@@ -1,6 +1,6 @@
 const express = require('express');
 const {protect} = require('../middlewares/authMiddleware')
-const { clockIn, clockOut, getAttendance } = require('../controllers/attendanceController');
+const { clockIn, clockOut, getAttendance, startJob } = require('../controllers/attendanceController');
 const {
    test ,getAllTechnicians,getAllEmployers,
     createTechnician,
@@ -77,6 +77,7 @@ router.route('/technician/:id/offers').get(protect,getOfferByTechnicianId)
 router.route('/jobs/:id/clockin').post(protect,clockIn)
 router.route('/jobs/:id/clockout').post(protect,clockOut)
 router.route('/attendance').get(protect,getAttendance)
+router.route('/jobs/startJob').post(protect,startJob)
 
 router.route('/technician/:id/employment').get(protect,getEmploymentbyTechnicianId)
 router.route('/offer/:id/employment').get(protect,getEmploymentbyOfferId)
