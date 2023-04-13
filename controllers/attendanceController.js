@@ -27,6 +27,52 @@ const getAttendance = async (req, res, next) => {
     }
   };
 
+
+  const startJob = async (req, res, next) => {
+
+    console.log('startJob()');
+  
+    console.log(req.body);
+  
+  
+    // const particularempnt =
+    //   await employment.employmentModel.findById(
+    //     req.params.id
+    //   );
+    
+   
+     
+    try {
+  
+      // const attendanceObj = {
+      //  employment: particularempnt,
+      //  clock_out:null
+      // };
+    
+      const attendancejob = await job.jobModel.updateOne(
+        {_id: req.body.job_id },
+        { $set: { status: 'ongoing' } }
+        )
+        const attendanceOffer = await offer.offerModel.updateOne(
+          {_id: req.body.offer_id },
+            { $set: { offerStatus: 'ongoing' } }
+          )
+        
+      
+  
+      res.json("Job Started,you can Clock in now");
+      return
+    } catch (error) {
+      res.json({
+        error: true,
+        message: error.message
+      });
+      return
+    }
+  };
+
+
+
 const clockIn = async (req, res, next) => {
 
     console.log('clockIn()');
@@ -51,14 +97,14 @@ const clockIn = async (req, res, next) => {
       const offer1 = await attendance.dailyAttendanceModel.create(
         attendanceObj
       );
-      const attendancejob = await job.jobModel.updateOne(
-        {_id: req.body.job_id },
-        { $set: { status: 'ongoing' } }
-        )
-        const attendanceOffer = await offer.offerModel.updateOne(
-          {_id: req.body.offer_id },
-            { $set: { offerStatus: 'ongoing' } }
-          )
+      // const attendancejob = await job.jobModel.updateOne(
+      //   {_id: req.body.job_id },
+      //   { $set: { status: 'ongoing' } }
+      //   )
+      //   const attendanceOffer = await offer.offerModel.updateOne(
+      //     {_id: req.body.offer_id },
+      //       { $set: { offerStatus: 'ongoing' } }
+      //     )
         
       
   
@@ -124,5 +170,6 @@ const clockIn = async (req, res, next) => {
 module.exports = {
     clockIn,
     clockOut,
-    getAttendance
+    getAttendance,
+    startJob
 }
