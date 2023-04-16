@@ -25,12 +25,20 @@ console.log('JWT works')
     } catch (error) {
       console.log(error)
       res.status(401)
+      res.json({
+        "error": true,
+        "message": "Not authorized, no token"
+    });
       // throw new Error('Not authorized')
     }
   }
 
   if (!token) {
     res.status(401)
+    res.json({
+      "error": true,
+      "message": "Not authorized, no token"
+  });
     // throw new Error('Not authorized, no token')
   }
 })
