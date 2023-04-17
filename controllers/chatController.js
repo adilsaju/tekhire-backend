@@ -43,7 +43,7 @@ const chat1 = async (req, res, next) => {
         await job.jobModel.findById(
           req.body.job
         );
-      console.log("gaaaaanddddddddddd");
+      
       console.log(pemp, ptech, pjob);
 
       const room1 = {
@@ -53,7 +53,7 @@ const chat1 = async (req, res, next) => {
         job_id: pjob,
         // room_created: Date.now
       };
-      console.log("roomiee");
+ 
       console.log(room1);
 
       if (ptech===null||pemp===null||pjob===null)
